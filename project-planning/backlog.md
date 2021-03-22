@@ -5,15 +5,24 @@ A collection of user stories you can choose from.  Stories inside of each priori
 
 ---
 - calendar
-- repo
-- Story Dependency Diagram
-- Wireframe
-- create a group issue
-- backlog
-- development strategy
-- create project board
-- client
-- back-end (divide per routes)
+- repo - Bermarte
+- Story Dependency Diagram - Anisya
+- Wireframe - Patrick
+- create a group issue - Bermarte
+- backlog - Anisya
+- development strategy - Anisya
+- create project board - Brain
+- client/front-end - HTML, CSS(CSS framework), JS - Patrick/Bermarte
+- back-end/api - Node (divide per routes) - Anisya/Brain/Bermarte
+  like /tracks
+- queries
+
+### routes
+- show the total number of tracks
+- ?
+- ?
+
+---
 ----
 ## Must-Haves
 
