@@ -4,7 +4,10 @@ A collection of user stories you can choose from.  Stories inside of each priori
 
 
 ---
-- calendar
+## Brainstorming and tasks
+
+- [clip about chinook DB](https://www.youtube.com/watch?v=3i3Z3y46KsM)
+- calendar (make a calendar of the week, some people are not always available)
 - repo - Bermarte
 - Story Dependency Diagram - Anisya
 - Wireframe - Patrick
@@ -12,18 +15,46 @@ A collection of user stories you can choose from.  Stories inside of each priori
 - backlog - Anisya
 - development strategy - Anisya
 - create project board - Brain
-- client/front-end - HTML, CSS(CSS framework), JS - Patrick/Bermarte
+- client/front-end - HTML, CSS (CSS framework), JS - Patrick/Bermarte
 - back-end/api - Node (divide per routes) - Anisya/Brain/Bermarte
   like /tracks
 - queries
 
-### routes
-- show the total number of tracks
-- ?
-- ?
+### Routes and queries
+
+first make small experiments, then propose different routes and then let's make a selection.
+
+### Route `/api/sales` - queries:
+- biggest sale
+- average sale
+- number of sales
+- show month, year and Sales
+
+### Route `/api/catalog` - queries:
+- total number of tracks
+- total number of genres
+- total storage (GB or MB)
+- total hours
+- show how many tracks per genre
+- show how many tracks per format (mp3, wav)
+### Route `/api/tracks` - queries:
+- show tracks data
+
+### Route `/api/tracks/search` - queries:
+- search track per name
+- search track per id
+
+### Route `/api/tracks/add` - queries:
+- add a new track
+### Route `/api/customers` - queries:
+- search track
+
+### Route `/api/customers/add` - queries:
+- add a customer
+
+### Route `/api/sales` - queries:
 
 ---
-----
 ## Must-Haves
 
 > these are necessary for basic usability
