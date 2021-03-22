@@ -2,6 +2,19 @@
 
 A collection of user stories you can choose from.  Stories inside of each priority level are not necessarily in order, it's up to your group to decide how they fit into your strategy.  These are also just suggestion, feel free to change them or create your own!
 
+
+---
+- calendar
+- repo
+- Story Dependency Diagram
+- Wireframe
+- create a group issue
+- backlog
+- development strategy
+- create project board
+- client
+- back-end (divide per routes)
+----
 ## Must-Haves
 
 > these are necessary for basic usability
