@@ -32,6 +32,21 @@ const controllers = {
 
       });
   },
+  getOneByName: (req, res) => {
+    const sql = `SELECT * FROM tracks WHERE Name =  ${req.params.name}`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({
+          "error": err.message
+        });
+        return;
+      }
+
+      res.json(rows)
+
+    });
+},
   create: (req, res) => {
     // read row data from body
   },
