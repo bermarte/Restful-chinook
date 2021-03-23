@@ -12,6 +12,7 @@ const controllers = {
       }
 
       res.json(rows)
+  
     });
   },
   getOne: (req, res) => { },
