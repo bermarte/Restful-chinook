@@ -17,7 +17,7 @@ A collection of user stories you can choose from.  Stories inside of each priori
 - create project board - Brain
 - client/front-end - HTML, CSS (CSS framework), JS - Patrick/Bermarte
 - back-end/api - Node (divide per routes) - Anisya/Brain/Bermarte
-  like /tracks
+  (example of route: `/tracks`)
 - queries
 
 ### Routes and queries
@@ -47,12 +47,26 @@ first make small experiments, then propose different routes and then let's make 
 ### Route `/api/tracks/add` - queries:
 - add a new track
 ### Route `/api/customers` - queries:
-- search track
-
+- show customers by sales
+- show total number of customers
+- show customers's ranking (top 10)
+- show customers by  city
 ### Route `/api/customers/add` - queries:
 - add a customer
 
 ### Route `/api/sales` - queries:
+- biggest sale
+- average sale
+- total of sales
+- sales per month
+- sales per year
+- sales by country
+
+### Route `/api/sales/country` - queries:
+- search by country
+
+### Route `/api/sales/year` - queries:
+- search sale by year
 
 ---
 ## Must-Haves
