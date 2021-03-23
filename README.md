@@ -1,5 +1,4 @@
 # Restful chinook
-<<<<<<< HEAD
 
 Learn how to interact with a SQL by building a simple back-end and a front-end using the chinook DB.
 
@@ -13,8 +12,6 @@ A good reference could be [this clip](https://www.youtube.com/watch?v=3i3Z3y46Ks
 - [project board](https://github.com/bermarte/Restful-chinook/projects/1?fullscreen=true)
 
 <details>
-=======
->>>>>>> 0e0bf3e8b94922ae3911023e6a87456e4b996356
 
 This module's project is a two-week group project. Anything goes! The most important thing to keep in mind for this module's project is scoping, it's better to build something small that works than something big that doesn't.
 Here's a [starter repository](https://github.com/HackYourFutureBelgium/restful-chinook) you can use, but you don't have to.
