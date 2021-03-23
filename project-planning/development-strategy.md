@@ -1,4 +1,4 @@
-# JavaScript Quiz
+# Restful chinook
 
 ...
 
