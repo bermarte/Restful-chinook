@@ -1,4 +1,4 @@
-# Restful Chinook
+# Restful chinook
 
 This module's project is a two-week group project. Anything goes! The most important thing to keep in mind for this module's project is scoping, it's better to build something small that works than something big that doesn't.
 Here's a [starter repository](https://github.com/HackYourFutureBelgium/restful-chinook) you can use, but you don't have to.
