@@ -1,8 +1,8 @@
 const db = require('../db-connection');
 
 const controllers = {
-  getAll: (req, res) => {
 
+  getAll: (req, res) => {
     const sql = `SELECT * FROM tracks`;
 
     db.all(sql, (err, rows) => {
@@ -17,25 +17,26 @@ const controllers = {
     });
   },
   getOne: (req, res) => {
-    
+
     const sql = `SELECT * FROM tracks WHERE TrackId =  ${req.params.item}`;
     db.all(sql, (err, rows) => {
 
       if (err) {
         console.log(`id ${req.params.item} not found`)
         //if search by id fails, try search by name, instead
-        try {    
+        try {
           return controllers.getOneByName(req, res);
-        }
-        catch(e) {
+        } catch (e) {
           res.status(400).json({
             "error": err.message
           });
           return;
         }
       }
-         if (rows.length === 0) return res.json({"error": "no data found"});
-      res.json(rows);   
+      if (rows.length === 0) return res.json({
+        "error": "no data found"
+      });
+      res.json(rows);
     });
   },
   getOneByName: (req, res) => {
@@ -49,7 +50,9 @@ const controllers = {
         return;
       }
 
-      if (rows.length === 0) return res.json({"error": "no data found"});
+      if (rows.length === 0) return res.json({
+        "error": "no data found"
+      });
       res.json(rows)
 
     });
