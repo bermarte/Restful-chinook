@@ -24,37 +24,29 @@ A collection of user stories you can choose from.  Stories inside of each priori
 
 first make small experiments, then propose different routes and then let's make a selection.
 
-### Route `/api/sales` - queries:
-- biggest sale
-- average sale
-- number of sales
-- show month, year and Sales
+---
+## Must-Haves
 
-### Route `/api/catalog` - queries:
-- total number of tracks
-- total number of genres
-- total storage (GB or MB)
-- total hours
-- show how many tracks per genre
-- show how many tracks per format (mp3, wav)
+> these are necessary for basic usability
+
+### User can sign in/log in (criteria: log in button)
+
 ### Route `/api/tracks` - queries:
+
 - show tracks data
 
 ### Route `/api/tracks/search` - queries:
+
 - search track per name
 - search track per id
 
-### Route `/api/tracks/add` - queries:
-- add a new track
-### Route `/api/customers` - queries:
-- show customers by sales
-- show total number of customers
-- show customers's ranking (top 10)
-- show customers by  city
-### Route `/api/customers/add` - queries:
-- add a customer
+
+## Should-Haves
+
+> these will complete the user experience
 
 ### Route `/api/sales` - queries:
+
 - biggest sale
 - average sale
 - total of sales
@@ -63,29 +55,39 @@ first make small experiments, then propose different routes and then let's make 
 - sales by country
 
 ### Route `/api/sales/country` - queries:
+
 - search by country
 
 ### Route `/api/sales/year` - queries:
+
 - search sale by year
 
----
-## Must-Haves
+### Route `/api/catalog` - queries:
 
-> these are necessary for basic usability
-
-- [ ] As a ... I want to ... so that ...
-  - _Given [context] when [a specific action is performed] then [a set of consequences should occur]_
-
-## Should-Haves
-
-> these will complete the user experience, but are not necessary
-
-- [ ] As a ... I want to ... so that ...
-  - _Given [context] when [a specific action is performed] then [a set of consequences should occur]_
+- total number of tracks
+- total number of genres
+- total storage (GB or MB)
+- total hours
+- show how many tracks per genre
+- show how many tracks per format (mp3, wav)
 
 ## Could-Haves
 
 > would be really cool ... if there's time
 
-- [ ] As a ... I want to ... so that ...
-  - _Given [context] when [a specific action is performed] then [a set of consequences should occur]_
+### Route `/api/customers/add` - queries:
+
+- add a customer (User can Sign up)
+
+### Route `/api/tracks/add` - queries:
+
+- add a new track
+
+### Route `/api/customers` - queries:
+
+- show customers by sales
+- show total number of customers
+- show customers ranking (top 10)
+- show customers by  city
+
+### Deploying App

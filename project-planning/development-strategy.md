@@ -1,5 +1,5 @@
 # Restful chinook
-
+## (Tracks-project)
 ...
 
 ---
@@ -17,27 +17,54 @@
 ---
 
 ## 0.Setup
-
+- Start a repo and clone it to directory
+- Add collaborators
+- Set up a project board
+- Create the backlog
+- Design a wireframe to set guidelines for UI/UX design.
+- Devise a development strategy
+- Create initial README file
+- Each developed branch is merged to `master` branch after completion
 ---
 
 ## 1. Initialize Application
 
-__As a user I want to see the initial page when I load the site__
+- Accessible website built with HTML and CSS
+- Create input element div element for each display section
+- Styling of the html document and its body styling of the background, inner content and lists (with CSS framework)
 
-- _Given [context] when [a specific action is performed] then [a set of consequences should occur]__
-- ...
+### 1. User Story: Log in/Sign in
+- Create sign in button with JS function log in to the main page.
 
-### REPO
+### 2. User Story: Tracks
+Create a fully-functioning API, routes and path:
+- `/api/tracks`
+- `/api/tracks/search`
+- `/api/tracks/add`
 
-- This user story is developed on branch `_`.
-- This branch is merged to `master` branch after completion.
+### 3. User Story: Sales
+Create a fully-functioning API routes and path:
+- `/api/sales`
+- `/api/sales/country`
+- `/api/sales/year`
 
-### Task A
+### 4. User Story: Catalog
 
-### Task B
+Create a fully-functioning API route:
+- `/api/catalog`
 
-### Task ...
+### 5. User Story : Customers
+
+Create a fully-functioning API routes and path:
+- `/api/customers`
+- `/api/customers/add`
 
 ---
 
-## ...
+#### A. User must be able to perform any CRUD operation to the SQLite database using REST API commands, the server must process the request and give back a response and status "ok" or and status "error" with a message.
+
+#### B. The JS files add the functionalities to process incoming HTTP requests and execute the operation.
+
+#### C. Finishing Touch
+
+#### D. Deploy the App if everything are working
