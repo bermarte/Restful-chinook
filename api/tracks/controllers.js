@@ -1,7 +1,7 @@
 const db = require('../db-connection');
 
 const controllers = {
-    getAll: (req, res) => {
+     getAll: (req, res) => {
 
       const sql = `SELECT * FROM tracks`;
 
