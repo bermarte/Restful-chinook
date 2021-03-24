@@ -34,8 +34,7 @@ const controllers = {
           return;
         }
       }
-      console.log('FIRST', rows)
-      if (rows.length === 0) return res.json({"error": "no data found"});
+         if (rows.length === 0) return res.json({"error": "no data found"});
       res.json(rows);   
     });
   },
