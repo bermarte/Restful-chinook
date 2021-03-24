@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', controllers.getAll);
 
-router.get('/:id', controllers.getOne);
+router.get('/search/:item', controllers.getOne);
 
 router.post('/', controllers.create);
 
