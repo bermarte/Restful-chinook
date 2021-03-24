@@ -24,7 +24,7 @@ const controllers = {
       if (err) {
         console.log(`id ${req.params.item} not found`)
         //if search by id fails, try search by name, instead
-        try {
+        try {    
           return controllers.getOneByName(req, res);
         }
         catch(e) {
@@ -34,11 +34,13 @@ const controllers = {
           return;
         }
       }
-      res.json(rows);
+      console.log('FIRST', rows)
+      if (rows.length === 0) return res.json({"error": "no data found"});
+      res.json(rows);   
     });
   },
   getOneByName: (req, res) => {
-    //const sql = `SELECT * FROM tracks WHERE Name =  "Snowballed"`;
+
     const sql = `SELECT * FROM tracks WHERE Name =  "${req.params.item}"`;
     db.all(sql, (err, rows) => {
       if (err) {
@@ -47,6 +49,8 @@ const controllers = {
         });
         return;
       }
+
+      if (rows.length === 0) return res.json({"error": "no data found"});
       res.json(rows)
 
     });
