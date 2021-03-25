@@ -6,7 +6,7 @@
 
 ## User Story Dependencies
 
-![Story Dependency Diagram]()
+![Story Dependency Diagram](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/user%20story.png?raw=true)
 
 ---
 
