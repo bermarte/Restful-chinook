@@ -3,7 +3,7 @@ const db = require('../db-connection');
 const controllers = {
 
   getAll: (req, res) => {
-    const sql = `SELECT * FROM tracks`;
+    const sql = `SELECT * FROM tracks LIMIT 21`;
 
     db.all(sql, (err, rows) => {
       if (err) {
