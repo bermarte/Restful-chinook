@@ -15,8 +15,8 @@ A collection of user stories you can choose from.  Stories inside of each priori
 - backlog - Anisya
 - development strategy - Anisya
 - create project board - Brain
-- client/front-end - HTML, CSS (CSS framework), JS - Patrick/Bermarte
-- back-end/api - Node (divide per routes) - Anisya/Brain/Bermarte
+- client/front-end - HTML, CSS (CSS framework), JS - Patrick/Anisya/Bermarte
+- back-end/api - Node (divide per routes) - Brain/Bermarte
   (example of route: `/tracks`)
 - queries
 
@@ -28,8 +28,6 @@ first make small experiments, then propose different routes and then let's make 
 ## Must-Haves
 
 > these are necessary for basic usability
-
-### User can sign in/log in (criteria: log in button)
 
 ### Route `/api/tracks` - queries:
 
@@ -44,6 +42,31 @@ first make small experiments, then propose different routes and then let's make 
 ## Should-Haves
 
 > these will complete the user experience
+
+### Route `/api/playlists` - queries:
+
+- User can see the `PlaylistId` and `Name`
+
+### Route `/api/albums` - queries:
+
+- User can see the `AlbumsId` `Title`and `ArtistId`
+
+### Route `/api/artist` - queries:
+
+- User can see the `ArtistId` and `Name`
+
+### Route `/api/genres` - queries:
+
+- User can see the `GenresId` and `Name`
+
+### Route `/api/media-types` - queries:
+
+- User can see the `MediaTypeId` and `Name`
+
+
+## Could-Haves
+
+> would be really cool ... if there's time
 
 ### Route `/api/sales` - queries:
 
@@ -71,10 +94,12 @@ first make small experiments, then propose different routes and then let's make 
 - show how many tracks per genre
 - show how many tracks per format (mp3, wav)
 
-## Could-Haves
+### Route `/api/customers` - queries:
 
-> would be really cool ... if there's time
-
+- show customers by sales
+- show total number of customers
+- show customers ranking (top 10)
+- show customers by  city
 ### Route `/api/customers/add` - queries:
 
 - add a customer (User can Sign up)
@@ -82,12 +107,5 @@ first make small experiments, then propose different routes and then let's make 
 ### Route `/api/tracks/add` - queries:
 
 - add a new track
-
-### Route `/api/customers` - queries:
-
-- show customers by sales
-- show total number of customers
-- show customers ranking (top 10)
-- show customers by  city
 
 ### Deploying App

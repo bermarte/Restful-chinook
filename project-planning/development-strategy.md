@@ -1,12 +1,12 @@
 # Restful chinook
-## (Tracks-project)
+## (Muziek-project)
 ...
 
 ---
 
 ## User Story Dependencies
 
-![Story Dependency Diagram](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/user%20diagram.png?raw=true)
+![Story Dependency Diagram]()
 
 ---
 
@@ -27,44 +27,74 @@
 - Each developed branch is merged to `master` branch after completion
 ---
 
-## 1. Initialize Application
+## Back-End
 
-- Accessible website built with HTML and CSS
-- Create input element div element for each display section
-- Styling of the html document and its body styling of the background, inner content and lists (with CSS framework)
+- `db-connection.js` connect the database with SQLite3
 
-### 1. User Story: Log in/Sign in
-- Create sign in button with JS function log in to the main page.
-
-### 2. User Story: Tracks
+### 1. User Story: Tracks
 Create a fully-functioning API, routes and path:
-- `/api/tracks`
-- `/api/tracks/search`
+- `/api/tracks` to view tracks data such as `TrackId`, `Name`, `AlbumId`, `MediaTypeId`, `GenreId`, `Composer`, `Milliseconds`, `Bytes`, `UnitPrice`
+- `/api/tracks/search/:items`
 - `/api/tracks/add`
+- `controller.js`, `routes.js`, `index.js`
 
-### 3. User Story: Sales
+### 2. User Story: Playlists
+
+Create a fully-functioning API route:
+- `/api/playlist` to view `PlaylistId`, `Name`
+- `controller.js`, `routes.js`, `index.js`
+
+### 3. User Story: Albums
+
+Create a fully-functioning API route:
+- `/api/albums` to view `AlbumId`, `Title`, and `ArtistId`
+- `controller.js`, `routes.js`, `index.js`
+
+### 4. User Story: Artists
+
+Create a fully-functioning API route:
+- `/api/artists` to view `ArtistId`, `Name`
+- `controller.js`, `routes.js`, `index.js`
+
+### 5. User Story: Genres
+
+Create a fully-functioning API route:
+- `/api/genres` to view `GenreId`, `Name`
+- `controller.js`, `routes.js`, `index.js`
+
+### 6. User Story: Media-types
+
+Create a fully-functioning API route:
+- `/api/media-types` to view `MediaTypeId`, `Name`
+- `controller.js`, `routes.js`, `index.js`
+### 7. User Story: Sales
 Create a fully-functioning API routes and path:
 - `/api/sales`
 - `/api/sales/country`
 - `/api/sales/year`
 
-### 4. User Story: Catalog
+### 8. User Story: Catalog
 
 Create a fully-functioning API route:
 - `/api/catalog`
 
-### 5. User Story : Customers
+### 9. User Story : Customers
 
 Create a fully-functioning API routes and path:
 - `/api/customers`
 - `/api/customers/add`
+## Front-End
 
+- Design the wireframe with Figma
+- Create accessible website built with HTML, CSS and JS
+- Create input element div element for each display section
+- Styling of the html document and its body styling of the background, inner content and lists (with CSS framework)
+
+## Finishing Touch
+
+## Deploy the App if everything are working
+
+- Heroku
 ---
 
-#### A. User must be able to perform any CRUD operation to the SQLite database using REST API commands, the server must process the request and give back a response and status "ok" or and status "error" with a message.
 
-#### B. The JS files add the functionalities to process incoming HTTP requests and execute the operation.
-
-#### C. Finishing Touch
-
-#### D. Deploy the App if everything are working
