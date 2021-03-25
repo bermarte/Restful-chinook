@@ -42,6 +42,8 @@ const controllers = {
   },
   getOneByName: (req, res) => {
 
+    // For AC/DC write AC%2FDC for it to work on the routes
+
     const sql = `SELECT * FROM genres WHERE Name =  "${req.params.item}"`;
     db.all(sql, (err, rows) => {
       if (err) {

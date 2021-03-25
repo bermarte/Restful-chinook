@@ -16,7 +16,7 @@ const controllers = {
   },
   getOne: (req, res) => { 
 
-    const sql = `SELECT * FROM genres WHERE genreId =  ${req.params.item}`;
+    const sql = `SELECT * FROM albums WHERE AlbumId =  ${req.params.item}`;
 
     db.all(sql, (err, rows) => {
 
@@ -40,7 +40,7 @@ const controllers = {
   },
   getOneByName: (req, res) => {
 
-    const sql = `SELECT * FROM genres WHERE Name =  "${req.params.item}"`;
+    const sql = `SELECT * FROM albums WHERE Title =  "${req.params.item}"`;
     db.all(sql, (err, rows) => {
       if (err) {
         res.status(400).json({

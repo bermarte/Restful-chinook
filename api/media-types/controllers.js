@@ -14,7 +14,7 @@ const controllers = {
       res.json(rows)
     });
   },
-  getOne: (req, res) => { const sql = `SELECT * FROM media_types WHERE media_typeId =  ${req.params.item}`;
+  getOne: (req, res) => { const sql = `SELECT * FROM media_types WHERE MediaTypeId =  ${req.params.item}`;
 
   db.all(sql, (err, rows) => {
 
