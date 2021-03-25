@@ -77,6 +77,7 @@ const controllers = {
   },
   update: (req, res) => {
     // read row data from body
+    res.json({"message": "update"});
   },
   delete: (req, res) => {
 
