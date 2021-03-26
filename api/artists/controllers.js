@@ -7,16 +7,18 @@ const controllers = {
 
     db.all(sql, (err, rows) => {
       if (err) {
-        res.status(400).json({ "error": err.message });
+        res.status(400).json({
+          "error": err.message
+        });
         return;
       }
 
       res.json(rows)
     });
   },
-  getOne: (req, res) => { 
+  getOne: (req, res) => {
 
-    const sql = `SELECT * FROM artists WHERE artistId =  ${req.params.item}`;
+    const sql = `SELECT * FROM artists WHERE ArtistId =  ${req.params.item}`;
 
     db.all(sql, (err, rows) => {
 
@@ -76,9 +78,43 @@ const controllers = {
   },
   update: (req, res) => {
     // read row data from body
+    const re = req.body;
+    //first check if that item exists
+    let sql = `SELECT * FROM artists WHERE ArtistId =  ${req.params.id}`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({
+          "error": err.message
+        });
+        return;
+      }
+      if (rows.length === 0) return res.json({
+        "error": "no data found"
+      });
+
+      else {
+
+        //there's an item with that id, it's okay to modify it
+        sql = `UPDATE artists SET Name="${re.name}" WHERE ArtistId = ${req.params.id}`;
+
+        db.all(sql, (err, rows) => {
+          if (err) {
+            res.status(400).json({
+              "error": err.message
+            });
+            return;
+          }
+          res.json({
+            "message": "artist changed"
+          });
+        });
+
+      }
+    });
   },
   delete: (req, res) => {
-    let sql = `SELECT * FROM artists WHERE artistId =${req.params.id}`;
+    let sql = `SELECT * FROM artists WHERE ArtistId =${req.params.id}`;
 
     db.all(sql, (err, rows) => {
       if (err) {
@@ -95,7 +131,7 @@ const controllers = {
       else {
 
         //there's an item with that id, it's okay to delete it
-        sql = `DELETE FROM artists WHERE artistId =${req.params.id}`;
+        sql = `DELETE FROM artists WHERE ArtistId =${req.params.id}`;
 
         db.all(sql, (err, rows) => {
           if (err) {
@@ -112,7 +148,7 @@ const controllers = {
       }
 
     });
-   }
+  }
 }
 
 module.exports = controllers;

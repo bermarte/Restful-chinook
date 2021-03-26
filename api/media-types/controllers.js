@@ -68,12 +68,46 @@ const controllers = {
         return;
       }
       res.json({
-        "message": "media_types added"
+        "message": "media_type added"
       })
     });
   },
   update: (req, res) => {
-    // read row data from body
+   // read row data from body
+   const re = req.body;
+   //first check if that item exists
+   let sql = `SELECT * FROM media_types WHERE MediaTypeId =  ${req.params.id}`;
+
+   db.all(sql, (err, rows) => {
+     if (err) {
+       res.status(400).json({
+         "error": err.message
+       });
+       return;
+     }
+     if (rows.length === 0) return res.json({
+       "error": "no data found"
+     });
+
+     else {
+
+       //there's an item with that id, it's okay to modify it
+       sql = `UPDATE media_types SET Name="${re.name}" WHERE MediaTypeId = ${req.params.id}`;
+
+       db.all(sql, (err, rows) => {
+         if (err) {
+           res.status(400).json({
+             "error": err.message
+           });
+           return;
+         }
+         res.json({
+           "message": "media_type changed"
+         });
+       });
+
+     }
+   });
   },
   delete: (req, res) => {
 
