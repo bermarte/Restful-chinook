@@ -60,7 +60,7 @@ const controllers = {
   create: (req, res) => {
     // read row data from body
     const re = req.body;
-    const sql = `INSERT into artists(artistId, Name)values((SELECT MAX(artistId) from artists)+1, "${re.name}")`;
+    const sql = `INSERT into artists(ArtistId, Name)values((SELECT MAX(ArtistId) from artists)+1, "${re.name}")`;
 
     db.all(sql, (err, rows) => {
       if (err) {
