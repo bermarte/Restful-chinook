@@ -62,11 +62,62 @@ const controllers = {
   },
   create: (req, res) => {
     // read row data from body
+    const re = req.body;
+    const sql = `INSERT into genres(genreId, Name)values((SELECT MAX(genreId) from genres)+1, "${re.name}")`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({
+          "error": err.message
+        });
+        return;
+      }
+      res.json({
+        "message": "genre added"
+      })
+    });
   },
   update: (req, res) => {
     // read row data from body
   },
-  delete: (req, res) => {}
+  delete: (req, res) => {
+
+    let sql = `SELECT * FROM genres WHERE genreId =${req.params.id}`;
+
+    db.all(sql, (err, rows) => {
+      if (err) {
+        res.status(400).json({
+          "error": err.message
+        });
+        return;
+      }
+      //selection is null, no id was found
+      if (rows.length === 0) return res.json({
+        "error": "no data found"
+      })
+
+      else {
+
+        //there's an item with that id, it's okay to delete it
+        sql = `DELETE FROM genres WHERE genreId =${req.params.id}`;
+
+        db.all(sql, (err, rows) => {
+          if (err) {
+            res.status(400).json({
+              "error": err.message
+            });
+            return;
+          }
+          res.json({
+            "message": "genres deleted"
+          });
+        });
+
+      }
+
+    });
+
+  }
 }
 
 module.exports = controllers;
