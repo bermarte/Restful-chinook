@@ -8,8 +8,10 @@ const controllers = {
     db.all(sql, (err, rows) => {
       if (err) {
         res.status(400).json({
+          
           "error": err.message
         });
+          
         return;
       }
 
