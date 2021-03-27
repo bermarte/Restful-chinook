@@ -43,9 +43,13 @@ Group 1 is:
 - Patrick
 
 ## Prepare project
-- install SQLite
+- In general, to install SQLite
   - Debian/Ubuntu: `sudo apt-get install sqlite3`
   - OSX, windows: [home page](https://sqlite.org/download.html)
 
+- `npm install`
+- `npm run dev`
+
 ## Reference
 - [SQLite Tutorial For Beginners](https://www.youtube.com/watch?v=HQKwgk6XkIA&list=LL&index=2)
+- [How to Load an SQLite Database](https://www.youtube.com/watch?v=YKRulPydKGI)
