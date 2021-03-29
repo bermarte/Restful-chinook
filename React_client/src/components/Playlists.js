@@ -1,6 +1,6 @@
 import '../App.css';
-import {Table, Container, Row, Button, ButtonGroup } from 'react-bootstrap';
-import React, { Component } from 'react';
+import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
+import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -17,18 +17,18 @@ class  Playlists extends Component {
         return body;
     }
 
+    //get all the playlists
     componentDidMount() {
         this.getTracks()
           .then(res => {
             this.setState({ getPlaylists: res });
           })
-      }
+    }
       
     render() {
         const { getPlaylists } = this.state;
-        console.log(getPlaylists);
 
-
+        //get all playlists (home)
         const Home = () => (
           <Row>
           <Table striped bordered hover>
@@ -44,6 +44,48 @@ class  Playlists extends Component {
           </Table>
           </Row>
         );
+        
+        //add new playlist
+        const AddPlaylist = () => {
+
+          function PlayListForm() {
+
+            //state using hook
+            const [playlistName,setPlaylistName] = useState();
+          
+            const handleSubmit = (event) => {          
+              event.preventDefault();
+              event.stopPropagation();   
+              alert(playlistName)
+            };
+
+            const handlePlaylistChange = (event) => {
+              console.log(event.target.value);
+              setPlaylistName(event.target.value);
+            };
+          
+          return(
+          <Container className="mt-5">
+          <Row className="justify-content-md-center">
+          <Col xs lg="6">
+            <Jumbotron>
+          <Form onSubmit={handleSubmit} >
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Add a new playlist</Form.Label>
+            <Form.Control value={playlistName} onChange={handlePlaylistChange} type="text" placeholder="Playlist name" controlId="newPlaylist" required/>
+          </Form.Group>
+          <Button variant="primary" type="submit" >
+            Submit
+          </Button>
+          </Form>
+          </Jumbotron>
+          </Col>
+          </Row>
+          </Container>
+        )
+      }
+      return(<PlayListForm />);
+      };
 
         return(
             <div>
@@ -62,6 +104,7 @@ class  Playlists extends Component {
                 <Switch>
                 <Container>
                 <Route path="/playlists" exact component={Home} />
+                <Route path="/playlist/add" component={AddPlaylist} />
                 </Container>
                 </Switch>
                 </Router>
@@ -70,7 +113,5 @@ class  Playlists extends Component {
         }
 
 }
-
-
 
 export default Playlists;
