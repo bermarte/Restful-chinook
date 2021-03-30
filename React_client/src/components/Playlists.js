@@ -31,17 +31,17 @@ class  Playlists extends Component {
         //get all playlists (home)
         const Home = () => (
           <Row>
-          <Table striped bordered hover>
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          { getPlaylists.map(playlist => <tr><td>{playlist.PlaylistId}</td><td>{playlist.Name}</td></tr>) }
-          </tbody>
-          </Table>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+              { getPlaylists.map(playlist => <tr><td>{playlist.PlaylistId}</td><td>{playlist.Name}</td></tr>) }
+              </tbody>
+            </Table>
           </Row>
         );
         
@@ -56,31 +56,51 @@ class  Playlists extends Component {
             const handleSubmit = (event) => {          
               event.preventDefault();
               event.stopPropagation();   
-              alert(playlistName)
+              savePlaylist(playlistName);
             };
 
             const handlePlaylistChange = (event) => {
-              console.log(event.target.value);
               setPlaylistName(event.target.value);
             };
+
+            const savePlaylist = async (list) => {
+              const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({name: list})
+              };
+              try {
+                const fetchResponse = await fetch(`http://localhost:8080/api/playlists`, settings);
+                const data = await fetchResponse.json();
+                alert('new item added');
+                return data;
+              } catch (e) {
+                alert('error');
+                return e;
+              }    
+
+            }
           
           return(
           <Container className="mt-5">
-          <Row className="justify-content-md-center">
-          <Col xs lg="6">
-            <Jumbotron>
-          <Form onSubmit={handleSubmit} >
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Add a new playlist</Form.Label>
-            <Form.Control value={playlistName} onChange={handlePlaylistChange} type="text" placeholder="Playlist name" controlId="newPlaylist" required/>
-          </Form.Group>
-          <Button variant="primary" type="submit" >
-            Submit
-          </Button>
-          </Form>
-          </Jumbotron>
-          </Col>
-          </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="6">
+                <Jumbotron>
+                  <Form onSubmit={handleSubmit} >
+                    <Form.Group>
+                      <Form.Label>Add a new playlist</Form.Label>
+                      <Form.Control onChange={handlePlaylistChange} type="text" placeholder="Playlist name" required/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" >
+                      Submit
+                    </Button>
+                  </Form>
+                </Jumbotron>
+              </Col>
+            </Row>
           </Container>
         )
       }
@@ -90,24 +110,22 @@ class  Playlists extends Component {
         return(
             <div>
               <Router>
-                <h3>
-                  Playlists ({getPlaylists.length})
-                  <ButtonGroup className="ml-2">
-                    <Link to="/playlist/add">
-                      <Button variant="secondary" size="sm">add</Button>
-                    </Link>
-                    <Link to="/playlist/search">
-                      <Button variant="secondary" size="sm">search</Button>
-                    </Link>
-                  </ButtonGroup>
-                </h3>
                 <Switch>
-                <Container>
-                <Route path="/playlists" exact component={Home} />
-                <Route path="/playlist/add" component={AddPlaylist} />
-                </Container>
+                  <Container>
+                    <h3>
+                      Playlists ({getPlaylists.length})
+                      <ButtonGroup className="ml-2">
+                        <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">adds</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/search">search</Link>
+                        {/* the component should update */}
+                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/playlists"}}>list</Link>
+                      </ButtonGroup>
+                    </h3>    
+                    <Route path="/playlists" exact component={Home} />
+                    <Route path="/playlist/add" component={AddPlaylist} />
+                  </Container>
                 </Switch>
-                </Router>
+              </Router>
             </div>
          );
         }
