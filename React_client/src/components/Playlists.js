@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 class  Playlists extends Component {
 
     state = {
-        getPlaylists: []
+        getPlaylists: [],
+        play: 'ok'
     }
 
     getTracks = async() => {
@@ -43,13 +44,41 @@ class  Playlists extends Component {
       }    
 
     }
+    
 
-    // handleRefresh = async() => {
-    //   //window.location.reload();
-    // };
+    handleInputChange(event){
+      let val = event.target.value;
+      //set value for editItem
+      this.state.play = val;
+    }
+
+    //edit item
+    async editItem(id) {
+
+      const val = this.state.play;
+
+      const settings = {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({name: val})
+      };
+      try {
+        const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${id}`, settings);
+        const data = await fetchResponse.json();
+        alert('item saved');
+        return data;
+      } catch (e) {
+        alert('error');
+        return e;
+      }    
+
+    }
       
     render() {
-        const { getPlaylists } = this.state;
+        const { getPlaylists, play } = this.state;
 
         //get all playlists (home)
         const Home = () => (
@@ -63,13 +92,29 @@ class  Playlists extends Component {
                 </tr>
               </thead>
               <tbody>
-              { getPlaylists.map(playlist => <tr><td>{playlist.PlaylistId}</td><td>{playlist.Name}</td>
-              <td>
-              <ButtonGroup>
-                <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">edit</Link>
-                <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
-                {/* to="/playlist/search" */}
-              </ButtonGroup></td></tr>)
+              { getPlaylists.map(playlist => 
+                <tr>
+                  <td>{playlist.PlaylistId}</td>
+                  <td>
+                  <input
+                  type="text"
+                  className="form-control"
+                  id={playlist.PlaylistId}
+                  defaultValue={playlist.Name}
+                  onChange={(event) => this.handleInputChange(event)}
+                 
+                  />
+                  </td>
+                  {/* <td>{playlist.Name}</td> */}
+                  <td>
+                  <ButtonGroup>
+                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>edit</Link>
+                    {/* to="/playlist/add" */}
+                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
+                    {/* to="/playlist/search" */}
+                  </ButtonGroup>
+                  </td>
+                </tr>)
               }
               </tbody>
             </Table>
