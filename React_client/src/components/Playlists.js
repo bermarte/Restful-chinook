@@ -24,6 +24,29 @@ class  Playlists extends Component {
             this.setState({ getPlaylists: res });
           })
     }
+
+    //delete playlist by id
+    deleteItem = async (item) => {
+
+      const settings = {
+        method: 'DELETE'
+      };
+      try {
+        const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${item}`, settings);
+        const data = await fetchResponse.json();
+        alert('item deleted');
+        window.location.reload();
+        return data;
+      } catch (e) {
+        alert('error');
+        return e;
+      }    
+
+    }
+
+    // handleRefresh = async() => {
+    //   //window.location.reload();
+    // };
       
     render() {
         const { getPlaylists } = this.state;
@@ -36,10 +59,18 @@ class  Playlists extends Component {
                 <tr>
                   <th>#</th>
                   <th>Name</th>
+                  <th> </th>
                 </tr>
               </thead>
               <tbody>
-              { getPlaylists.map(playlist => <tr><td>{playlist.PlaylistId}</td><td>{playlist.Name}</td></tr>) }
+              { getPlaylists.map(playlist => <tr><td>{playlist.PlaylistId}</td><td>{playlist.Name}</td>
+              <td>
+              <ButtonGroup>
+                <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">edit</Link>
+                <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
+                {/* to="/playlist/search" */}
+              </ButtonGroup></td></tr>)
+              }
               </tbody>
             </Table>
           </Row>
@@ -115,7 +146,7 @@ class  Playlists extends Component {
                     <h3>
                       Playlists ({getPlaylists.length})
                       <ButtonGroup className="ml-2">
-                        <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">adds</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/search">search</Link>
                         {/* the component should update */}
                         <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/playlists"}}>list</Link>
