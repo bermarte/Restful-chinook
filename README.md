@@ -39,7 +39,6 @@ Group 1 is:
 - Anisya
 - Bermarte
 - Brain
-- Liubov
 - Patrick
 
 ## Prepare project
