@@ -1,5 +1,5 @@
 import '../App.css';
-import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
+import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron, Toast } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,8 @@ class  Playlists extends Component {
 
     state = {
         getPlaylists: [],
-        play: 'ok'
+        play: '',
+        searching: ''
     }
 
     getTracks = async() => {
@@ -43,13 +44,45 @@ class  Playlists extends Component {
         return e;
       }    
 
-    }
+    } 
     
-
+    //edit one of the items in the list
     handleInputChange(event){
       let val = event.target.value;
       //set value for editItem
       this.state.play = val;
+    }
+
+    //search by id or name
+    handleSearchChange(event){
+      let val = event.target.value;     
+      this.state.searching = val;
+    }
+    
+    //search item
+    handleSearch = async (event) => {
+      event.preventDefault();
+      const val = this.state.searching;
+      const response = await fetch(`/api/playlists/search/${val}`);
+      const body = await response.json();
+      if (response.status !== 200) throw Error(body.message);
+
+      let message;
+      if (body.error) {
+        message = body.error
+      }
+      else{
+        let data = body[0].Name;
+        let id = body[0].PlaylistId;
+        message = `id: ${id} ${data}`;
+      }
+      
+      //show results
+      document.getElementById("results").classList.remove("hide");
+      document.getElementById("results").classList.add("show");
+      document.getElementById("results").innerHTML = message;
+      
+      return body;
     }
 
     //edit item
@@ -78,7 +111,7 @@ class  Playlists extends Component {
     }
       
     render() {
-        const { getPlaylists, play } = this.state;
+        const { getPlaylists } = this.state;
 
         //get all playlists (home)
         const Home = () => (
@@ -96,19 +129,18 @@ class  Playlists extends Component {
                 <tr>
                   <td>{playlist.PlaylistId}</td>
                   <td>
-                  <input
-                  type="text"
-                  className="form-control"
-                  id={playlist.PlaylistId}
-                  defaultValue={playlist.Name}
-                  onChange={(event) => this.handleInputChange(event)}
-                 
-                  />
+                    <input
+                    type="text"
+                    className="form-control"
+                    id={playlist.PlaylistId}
+                    defaultValue={playlist.Name}
+                    onChange={(event) => this.handleInputChange(event)}
+                    />
                   </td>
                   {/* <td>{playlist.Name}</td> */}
                   <td>
                   <ButtonGroup>
-                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>edit</Link>
+                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Link>
                     {/* to="/playlist/add" */}
                     <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
                     {/* to="/playlist/search" */}
@@ -121,6 +153,43 @@ class  Playlists extends Component {
           </Row>
         );
         
+        //search component
+        const SearchPlaylist = () => {
+
+          return (
+            <Container className="mt-5">
+              <Row className="justify-content-md-center">
+                <Col xs lg="6">
+                  <Jumbotron>
+                  {/* onSubmit={handleSearch} */}
+                    <Form onSubmit={(event) => this.handleSearch(event)}>
+                      <Form.Group>
+                        <Form.Label>Search by id or by name</Form.Label>
+                        <Form.Control 
+                            type="text"
+                            placeholder="Playlist name"
+                            required
+                            onChange={(event) => this.handleSearchChange(event)}
+                         /> 
+                      </Form.Group>
+                      <Button variant="primary" type="submit" >
+                        Search
+                      </Button>
+                    </Form>
+
+                    {/* search resulsts */}
+                    <div className="mt-5 hide" id="results">
+                      <p>{this.state.searchResults}</p>
+                    </div>
+
+                  </Jumbotron>
+                </Col>  
+              </Row>
+            </Container>
+          );
+          
+        };
+
         //add new playlist
         const AddPlaylist = () => {
 
@@ -160,8 +229,8 @@ class  Playlists extends Component {
 
             }
           
-          return(
-          <Container className="mt-5">
+            return(
+            <Container className="mt-5">
             <Row className="justify-content-md-center">
               <Col xs lg="6">
                 <Jumbotron>
@@ -178,10 +247,11 @@ class  Playlists extends Component {
               </Col>
             </Row>
           </Container>
-        )
-      }
-      return(<PlayListForm />);
-      };
+            )
+          }
+          return(<PlayListForm />);
+
+        };
 
         return(
             <div>
@@ -199,6 +269,7 @@ class  Playlists extends Component {
                     </h3>    
                     <Route path="/playlists" exact component={Home} />
                     <Route path="/playlist/add" component={AddPlaylist} />
+                    <Route path="/playlist/search" component={SearchPlaylist} />
                   </Container>
                 </Switch>
               </Router>
