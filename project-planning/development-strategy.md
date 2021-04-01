@@ -12,7 +12,9 @@
 
 ## WIREFRAME
 
-![wireframe]()
+![wireframe1](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/login.png?raw=true)
+![wireframe2](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/wireframe.jpg?raw=true)
+![design](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/design.jpg?raw=true)
 
 ---
 
