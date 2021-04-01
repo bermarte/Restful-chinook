@@ -1,5 +1,5 @@
 import '../App.css';
-import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron, Toast } from 'react-bootstrap';
+import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -139,12 +139,12 @@ class  Playlists extends Component {
                   </td>
                   {/* <td>{playlist.Name}</td> */}
                   <td>
-                  <ButtonGroup>
-                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Link>
-                    {/* to="/playlist/add" */}
-                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
-                    {/* to="/playlist/search" */}
-                  </ButtonGroup>
+                    <ButtonGroup>
+                      <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Link>
+                      {/* to="/playlist/add" */}
+                      <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
+                      {/* to="/playlist/search" */}
+                    </ButtonGroup>
                   </td>
                 </tr>)
               }

@@ -1,7 +1,4 @@
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/Button';
-//import Container from 'react-bootstrap/Container';
 import React, { Component } from 'react';
 import Albums from './components/Albums';
 import Artists from './components/Artists';
@@ -9,8 +6,9 @@ import Genres from './components/Genres';
 import MediaTypes from './components/MediaTypes';
 import Playlists from './components/Playlists';
 import Tracks from './components/Tracks';
+import Menu from './components/Menu';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 
 class App extends Component {
   state = {
@@ -44,34 +42,11 @@ class App extends Component {
   render() {
     const { getRoot } = this.state;
 
-    function albums(){
-      console.log('albums');
-    }
-
     return (
       <div className="App">
         <Router>
           <h2>{getRoot}</h2>
-          <ButtonGroup size="lg" className="mb-2">
-            <Link to="/albums">
-              <Button onClick={albums}>Albums</Button>
-            </Link>
-            <Link to="/artists">
-              <Button>Artists</Button>
-            </Link>
-            <Link to="/genres">
-              <Button>Genres</Button>
-            </Link>
-            <Link to="/media-types">
-              <Button>Media-types</Button>
-            </Link>
-            <Link to="/playlists">
-              <Button>Playlists</Button>
-            </Link>
-            <Link to="/tracks">
-              <Button>Tracks</Button>
-            </Link>
-          </ButtonGroup>
+          <Menu />         
           <Switch>
             <Route path="/" exact component={Home} />
             {/* <Albums /> */}
