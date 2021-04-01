@@ -29,6 +29,10 @@ first make small experiments, then propose different routes and then let's make 
 
 > these are necessary for basic usability
 
+### Route `/api/customers`
+
+- The user able to log in with email/password (Log in button required)
+
 ### Route `/api/tracks` - queries:
 
 - show tracks data
