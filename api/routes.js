@@ -12,6 +12,7 @@ router.use('/genres', require('./genres'));
 router.use('/media-types', require('./media-types'));
 router.use('/playlists', require('./playlists'));
 router.use('/tracks', require('./tracks'));
+router.use('/customers', require ('./customers'));
 
 
 module.exports = router;
