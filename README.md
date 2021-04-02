@@ -49,6 +49,11 @@ Group 1 is:
 - `npm install`
 - `npm run dev`
 
+- to build the React client
+  - cd React_client/ 
+  - `npm install`
+  - `npm start`
+
 ## Reference
 - [SQLite Tutorial For Beginners](https://www.youtube.com/watch?v=HQKwgk6XkIA&list=LL&index=2)
 - [How to Load an SQLite Database](https://www.youtube.com/watch?v=YKRulPydKGI)
