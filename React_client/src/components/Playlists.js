@@ -2,7 +2,6 @@ import '../App.css';
 import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-//import { Link } from 'react-router-dom';
 
 class  Playlists extends Component {
 
@@ -11,6 +10,7 @@ class  Playlists extends Component {
         play: '',
         searching: ''
     }
+    playstate='';
 
     getTracks = async() => {
         const response = await fetch('/api/playlists');
@@ -45,13 +45,12 @@ class  Playlists extends Component {
       }    
 
     } 
-    
-    //edit one of the items in the list
+
     handleInputChange(event){
       let val = event.target.value;
       //set value for editItem
       this.state.play = val;
-    }
+    }  
 
     //search by id or name
     handleSearchChange(event){
