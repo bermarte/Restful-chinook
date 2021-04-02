@@ -26,3 +26,7 @@ code {
   border-color: rgb(205, 194, 255);
   background-color: rgb(246, 246, 255);
 }
+.artist-td {
+  vertical-align: middle;
+  display: inline-block;
+}

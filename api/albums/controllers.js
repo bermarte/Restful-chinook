@@ -62,7 +62,7 @@ const controllers = {
   create: (req, res) => {
     // read row data from body
     const re = req.body;
-    const sql = `INSERT into albums(AlbumId, Name)values((SELECT MAX(AlbumId) from albums)+1, "${re.name}")`;
+    const sql = `INSERT into albums(AlbumId, Title, ArtistId)values((SELECT MAX(AlbumId) from albums)+1, "${re.title}", "${re.artistid}")`;
 
     db.all(sql, (err, rows) => {
       if (err) {
@@ -96,7 +96,7 @@ const controllers = {
       else {
 
         //there's an item with that id, it's okay to modify it
-        sql = `UPDATE albums SET Name="${re.name}" WHERE AlbumId = ${req.params.id}`;
+        sql = `UPDATE albums SET Title="${re.title}", ArtistId=${re.artistid} WHERE AlbumId = ${req.params.id}`;
 
         db.all(sql, (err, rows) => {
           if (err) {
@@ -142,7 +142,7 @@ const controllers = {
             return;
           }
           res.json({
-            "message": "albums deleted"
+            "message": "album deleted"
           });
         });
 
