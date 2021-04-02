@@ -1,8 +1,7 @@
 import '../App.css';
-import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron, Toast } from 'react-bootstrap';
+import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 class  Playlists extends Component {
 
@@ -11,6 +10,7 @@ class  Playlists extends Component {
         play: '',
         searching: ''
     }
+    playstate='';
 
     getTracks = async() => {
         const response = await fetch('/api/playlists');
@@ -45,13 +45,12 @@ class  Playlists extends Component {
       }    
 
     } 
-    
-    //edit one of the items in the list
+
     handleInputChange(event){
       let val = event.target.value;
       //set value for editItem
       this.state.play = val;
-    }
+    }  
 
     //search by id or name
     handleSearchChange(event){
@@ -126,7 +125,7 @@ class  Playlists extends Component {
               </thead>
               <tbody>
               { getPlaylists.map(playlist => 
-                <tr>
+                <tr key={playlist.PlaylistId}>
                   <td>{playlist.PlaylistId}</td>
                   <td>
                     <input
@@ -139,12 +138,12 @@ class  Playlists extends Component {
                   </td>
                   {/* <td>{playlist.Name}</td> */}
                   <td>
-                  <ButtonGroup>
-                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Link>
-                    {/* to="/playlist/add" */}
-                    <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Link> 
-                    {/* to="/playlist/search" */}
-                  </ButtonGroup>
+                    <ButtonGroup>
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Button>
+                      {/* to="/playlist/add" */}
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Button> 
+                      {/* to="/playlist/search" */}
+                    </ButtonGroup>
                   </td>
                 </tr>)
               }
@@ -255,8 +254,7 @@ class  Playlists extends Component {
 
         return(
             <div>
-              <Router>
-                <Switch>
+              <Router>          
                   <Container>
                     <h3>
                       Playlists ({getPlaylists.length})
@@ -264,14 +262,15 @@ class  Playlists extends Component {
                         <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/search">search</Link>
                         {/* the component should update */}
-                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/playlists"}}>list</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/playlists"}} to="/#">list</Link>
                       </ButtonGroup>
-                    </h3>    
-                    <Route path="/playlists" exact component={Home} />
-                    <Route path="/playlist/add" component={AddPlaylist} />
-                    <Route path="/playlist/search" component={SearchPlaylist} />
-                  </Container>
-                </Switch>
+                    </h3>  
+                    <Switch>
+                      <Route path="/playlists" exact component={Home} />
+                      <Route path="/playlist/add" component={AddPlaylist} />
+                      <Route path="/playlist/search" component={SearchPlaylist} />
+                    </Switch>
+                  </Container>         
               </Router>
             </div>
          );
