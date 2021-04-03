@@ -94,7 +94,7 @@ class  Albums extends Component {
 
     //edit item
     async editItem(id, alb, artid) {
-        //no modifications
+        //no modifications are added
         const val_album = (this.state.album==='') ? alb : this.state.album;
         const val_art_id = (this.state.artist===0) ? artid : this.state.artist;
   
@@ -153,6 +153,7 @@ class  Albums extends Component {
                         id={album.ArtistId}
                         defaultValue={album.ArtistId}
                         onChange={(event) => this.handleInputArtistChange(event)}
+                        min="1" max="10000"
                     />
                   </td>
                   <td>

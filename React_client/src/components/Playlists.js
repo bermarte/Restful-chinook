@@ -85,9 +85,9 @@ class  Playlists extends Component {
     }
 
     //edit item
-    async editItem(id) {
-
-      const val = this.state.play;
+    async editItem(id, nam) {
+      //no modifications are added
+      const val = (this.state.play==='') ? nam : this.state.play;
 
       const settings = {
         method: 'PUT',
