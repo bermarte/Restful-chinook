@@ -176,7 +176,7 @@ class  Playlists extends Component {
                       </Button>
                     </Form>
 
-                    {/* search resulsts */}
+                    {/* search results */}
                     <div className="mt-5 hide" id="results">
                       <p>{this.state.searchResults}</p>
                     </div>
