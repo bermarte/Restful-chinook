@@ -93,10 +93,10 @@ class  Albums extends Component {
     }
 
     //edit item
-    async editItem(id) {
-
-        const val_album = this.state.album;
-        const val_art_id = this.state.artist;
+    async editItem(id, alb, artid) {
+        //no modifications
+        const val_album = (this.state.album==='') ? alb : this.state.album;
+        const val_art_id = (this.state.artist===0) ? artid : this.state.artist;
   
         const settings = {
           method: 'PUT',
@@ -157,7 +157,7 @@ class  Albums extends Component {
                   </td>
                   <td>
                     <ButtonGroup>
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Titile)}>save</Button>
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}>save</Button>
                       {/* to="/playlist/add" */}
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId)}>X</Button> 
                       {/* to="/playlist/search" */}
