@@ -2,6 +2,7 @@ import '../App.css';
 import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import React, { Component, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import Preloader from './Preloader';
 
 
 class  Tracks extends Component {
@@ -156,6 +157,7 @@ class  Tracks extends Component {
                   </tr>
                 </thead>
                 <tbody>
+
                 { getTracks.map(track =>
                     <tr key={track.TrackId}>
                         <td className="text-truncate" style={columnStyleSmall}>{track.TrackId}</td>
@@ -177,6 +179,9 @@ class  Tracks extends Component {
                     </tr>) }
                 </tbody>
               </Table>
+
+               {/* preloader */}
+               { getTracks.length<1?<Preloader />:''}
             </Row>
           );
 

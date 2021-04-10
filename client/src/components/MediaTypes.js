@@ -2,7 +2,7 @@ import '../App.css';
 import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-
+import Preloader from './Preloader';
 
 class  MediaTypes extends Component {
 
@@ -151,6 +151,8 @@ class  MediaTypes extends Component {
                 }
                 </tbody>
               </Table>
+              {/* preloader */}
+              { getMediaTypes.length<1?<Preloader />:''}
             </Row>
         );
 
