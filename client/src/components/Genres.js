@@ -2,6 +2,7 @@ import '../App.css';
 import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 'react-bootstrap';
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import Preloader from './Preloader';
 
 class  Genres extends Component {
 
@@ -147,6 +148,8 @@ class  Genres extends Component {
                 }
                 </tbody>
               </Table>
+              {/* preloader */}
+              { getGenreslists.length<1?<Preloader />:''}
             </Row>
         );
 

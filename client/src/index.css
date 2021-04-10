@@ -30,3 +30,18 @@ code {
   vertical-align: middle;
   display: inline-block;
 }
+
+.preloader-container{
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader{
+  width: 30%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
