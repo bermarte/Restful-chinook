@@ -45,12 +45,13 @@ Group 1 is:
 - In general, to install SQLite
   - Debian/Ubuntu: `sudo apt-get install sqlite3`
   - OSX, windows: [home page](https://sqlite.org/download.html)
+  - 
+- Run the back-end
+  - `npm install`
+  - `npm run dev`
 
-- `npm install`
-- `npm run dev`
-
-- to build the React client
-  - cd React_client/ 
+- Run the client
+  - `cd client`
   - `npm install`
   - `npm start`
 
