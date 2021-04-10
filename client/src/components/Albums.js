@@ -3,6 +3,7 @@ import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
+import PencilIcon from './PencilIcon';
 
 class  Albums extends Component {
 
@@ -131,13 +132,13 @@ class  Albums extends Component {
                   <th>#</th>
                   <th>Title</th>
                   <th>Artist</th>
-                  <th> </th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
               { getAlbums.map(album => 
                 <tr key={album.AlbumId}>
-                  <td>{album.AlbumId}</td>
+                  <td className="align-middle">{album.AlbumId}</td>
                   <td>
                     <input
                     type="text"
@@ -157,9 +158,9 @@ class  Albums extends Component {
                         min="1" max="10000"
                     />
                   </td>
-                  <td>
+                  <td className="align-middle">
                     <ButtonGroup>
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}>save</Button>
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}> <PencilIcon /> </Button>
                       {/* to="/playlist/add" */}
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId)}>X</Button> 
                       {/* to="/playlist/search" */}

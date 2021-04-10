@@ -3,6 +3,7 @@ import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
+import PencilIcon from './PencilIcon';
 
 class  MediaTypes extends Component {
 
@@ -122,13 +123,13 @@ class  MediaTypes extends Component {
                   <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th> </th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 { getMediaTypes.map(mediatype => 
                   <tr key={mediatype.MediaTypeId}>
-                    <td>{mediatype.MediaTypeId}</td>
+                    <td className="align-middle">{mediatype.MediaTypeId}</td>
                     <td>
                       <input
                       type="text"
@@ -138,10 +139,9 @@ class  MediaTypes extends Component {
                       onChange={(event) => this.handleInputChange(event)}
                       />
                     </td>
-                    {/* <td>{playlist.Name}</td> */}
-                    <td>
+                    <td className="align-middle">
                       <ButtonGroup>
-                        <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(mediatype.MediaTypeId, mediatype.Name)}>save</Button>
+                        <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(mediatype.MediaTypeId, mediatype.Name)}> <PencilIcon /> </Button>
                         {/* to="/playlist/add" */}
                         <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(mediatype.MediaTypeId)}>X</Button> 
                         {/* to="/playlist/search" */}

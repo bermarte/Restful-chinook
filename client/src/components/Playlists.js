@@ -3,6 +3,7 @@ import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron } from 
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
+import PencilIcon from './PencilIcon';
 
 class  Playlists extends Component {
 
@@ -121,13 +122,13 @@ class  Playlists extends Component {
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th> </th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
               { getPlaylists.map(playlist => 
                 <tr key={playlist.PlaylistId}>
-                  <td>{playlist.PlaylistId}</td>
+                  <td className="align-middle">{playlist.PlaylistId}</td>
                   <td>
                     <input
                     type="text"
@@ -137,10 +138,9 @@ class  Playlists extends Component {
                     onChange={(event) => this.handleInputChange(event)}
                     />
                   </td>
-                  {/* <td>{playlist.Name}</td> */}
-                  <td>
+                  <td className="align-middle">
                     <ButtonGroup>
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}>save</Button>
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}> <PencilIcon /> </Button>
                       {/* to="/playlist/add" */}
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Button> 
                       {/* to="/playlist/search" */}
