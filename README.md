@@ -30,6 +30,10 @@ Here's a [starter repository](https://github.com/HackYourFutureBelgium/restful-c
 ```
 </details>
 
+## Screenshot
+
+![Example screenshot](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/screenshot.png)
+
 ## chinook schema
 ![schema](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/chinook-erd.png)
 
