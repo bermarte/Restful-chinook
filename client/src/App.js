@@ -7,6 +7,7 @@ import MediaTypes from './components/MediaTypes';
 import Playlists from './components/Playlists';
 import Tracks from './components/Tracks';
 import Menu from './components/Menu';
+import Cover from './components/Cover';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
@@ -71,6 +72,7 @@ class App extends Component {
 const Home = () => (
   <div>
     <h3>Home</h3>
+    <Cover />
   </div>
 );
 
