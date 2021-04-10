@@ -3,6 +3,7 @@ import {Table, Container, Row, Button, ButtonGroup, Form, Col, Jumbotron, Toolti
 import React, { Component, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
+import PencilIcon from './PencilIcon';
 
 
 class  Tracks extends Component {
@@ -153,27 +154,26 @@ class  Tracks extends Component {
                   <th>Time</th>
                   <th>Bytes</th>
                   <th>Price</th>
-                  <th></th>
+                  <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
 
                 { getTracks.map(track =>
                     <tr key={track.TrackId}>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.TrackId}</td>
-                        <td className="text-truncate2" style={columnStyle}>{track.Name}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.AlbumId}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.MediaTypeId}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.GenreId}</td>
-                        <td className="text-truncate" style={columnStyle}>{track.Composer}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.Milliseconds}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.Bytes}</td>
-                        <td className="text-truncate" style={columnStyleSmall}>{track.UnitPrice}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.TrackId}</td>
+                        <td className="align-middle text-truncate2" style={columnStyle}>{track.Name}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.AlbumId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.MediaTypeId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.GenreId}</td>
+                        <td className="align-middle text-truncate" style={columnStyle}>{track.Composer}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.Milliseconds}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.Bytes}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.UnitPrice}</td>
                         <td className="align-middle">
                         <ButtonGroup>
-                          {/* <Link className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(track.TrackId)} to={`/track/edit/${track.TrackId}`}>save</Link> */}
-                          <Link className="btn btn-secondary btn-sm" role="button" to={`/track/edit/${track.TrackId}`}>edit</Link>
-                          <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(track.TrackId)}>X</Button> 
+                          <Link className="btn btn-primary btn-sm" role="button" to={`/track/edit/${track.TrackId}`}> <PencilIcon /> </Link>
+                          <Button className="btn btn-primary btn-sm" role="button" onClick={() => this.deleteItem(track.TrackId)}>X</Button> 
                         </ButtonGroup>
                         </td>
                     </tr>) }
