@@ -7,8 +7,8 @@ function Cover(props) {
   return (
     <Container>
         <Row>
-             <div class="cover-container">
-                 <div class="cover"></div>
+             <div className="cover-container">
+                 <div className="cover"></div>
              </div>
         </Row>
     </Container>
