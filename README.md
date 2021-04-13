@@ -1,6 +1,6 @@
 # Restful chinook
 
-Learn how to interact with a SQL by building a simple back-end and a front-end using the chinook DB.
+Learn how to interact with SQL by building a simple back-end and a front-end using the chinook DB.
 
 
 A good reference could be [this clip](https://www.youtube.com/watch?v=3i3Z3y46KsM) without all the charts and visualizations.
