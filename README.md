@@ -30,18 +30,31 @@ Here's a [starter repository](https://github.com/HackYourFutureBelgium/restful-c
 ```
 </details>
 
-## chinook schema
+## Screenshot
+
+![Example screenshot](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/screenshot.png)
+
+## Chinook schema
 ![schema](https://github.com/bermarte/Restful-chinook/blob/main/project-planning/chinook-erd.png)
 
 ### Group 1
-Group 1 is:
-
 - Anisya
 - Bermarte
 - Brain
 - Patrick
 
-## Prepare project
+### Technologies
+- Node 15.0.1
+- Nodemon 2.0.3
+- Express 4.17.1
+- Sqlite3 5.0.2
+- React 17.0.2
+- React-Bootstrap 1.5.2
+- VSC code
+- JavaScript
+- Postman
+
+## Set up
 - In general, to install SQLite
   - Debian/Ubuntu: `sudo apt-get install sqlite3`
   - OSX, windows: [home page](https://sqlite.org/download.html)
