@@ -7,11 +7,15 @@ import PencilIcon from './PencilIcon';
 
 class  Genres extends Component {
 
-    state = {
-        getGenreslists: [],
-        genre: '',
-        searching:''
+  constructor(props) { 
+    super(props);   
+    this.genre= "";
+    this.searching="";
+
+    this.state = {
+      getGenreslists: []
     }
+  }
 
     getGenres = async() => {
         const response = await fetch('/api/genres');
@@ -49,19 +53,19 @@ class  Genres extends Component {
     handleInputChange(event){
         let val = event.target.value;
         //set value for editItem
-        this.state.genre = val;
+        this.genre = val;
     }  
   
       //search by id or name
       handleSearchChange(event){
         let val = event.target.value;     
-        this.state.searching = val;
+        this.searching = val;
     }
 
     //search item
     handleSearch = async (event) => {
         event.preventDefault();
-        const val = this.state.searching;
+        const val = this.searching;
         const response = await fetch(`/api/genres/search/${val}`);
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
@@ -87,7 +91,7 @@ class  Genres extends Component {
     //edit item
     async editItem(id, nam) {
         //no modifications are added
-        const val = (this.state.genre==='') ? nam : this.state.genre;
+        const val = (this.genre==='') ? nam : this.genre;
   
         const settings = {
           method: 'PUT',
@@ -179,7 +183,6 @@ class  Genres extends Component {
   
                       {/* search results */}
                       <div className="mt-5 hide" id="results">
-                        <p>{this.state.searchResults}</p>
                       </div>
   
                     </Jumbotron>

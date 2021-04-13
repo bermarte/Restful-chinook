@@ -7,12 +7,15 @@ import PencilIcon from './PencilIcon';
 
 class  Playlists extends Component {
 
-    state = {
-        getPlaylists: [],
-        play: '',
-        searching: ''
+  constructor(props) { 
+    super(props);   
+    this.play= "";
+    this.searching="";
+
+    this.state = {
+      getPlaylists: []
     }
-    playstate='';
+  }
 
     getTracks = async() => {
         const response = await fetch('/api/playlists');
@@ -51,19 +54,19 @@ class  Playlists extends Component {
     handleInputChange(event){
       let val = event.target.value;
       //set value for editItem
-      this.state.play = val;
+      this.play = val;
     }  
 
     //search by id or name
     handleSearchChange(event){
       let val = event.target.value;     
-      this.state.searching = val;
+      this.searching = val;
     }
     
     //search item
     handleSearch = async (event) => {
       event.preventDefault();
-      const val = this.state.searching;
+      const val = this.searching;
       const response = await fetch(`/api/playlists/search/${val}`);
       const body = await response.json();
       if (response.status !== 200) throw Error(body.message);
@@ -89,7 +92,7 @@ class  Playlists extends Component {
     //edit item
     async editItem(id, nam) {
       //no modifications are added
-      const val = (this.state.play==='') ? nam : this.state.play;
+      const val = (this.play==='') ? nam : this.play;
 
       const settings = {
         method: 'PUT',
@@ -181,7 +184,6 @@ class  Playlists extends Component {
 
                     {/* search results */}
                     <div className="mt-5 hide" id="results">
-                      <p>{this.state.searchResults}</p>
                     </div>
 
                   </Jumbotron>

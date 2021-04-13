@@ -7,11 +7,15 @@ import PencilIcon from './PencilIcon';
 
 class  MediaTypes extends Component {
 
-    state = {
-        getMediaTypes: [],
-        media: '',
-        searching: ''
+  constructor(props) { 
+    super(props);   
+    this.media= "";
+    this.searching="";
+
+    this.state = {
+      getMediaTypes: []
     }
+  }
 
     getMediaTypes = async() => {
         const response = await fetch('/api/media-types');
@@ -51,19 +55,19 @@ class  MediaTypes extends Component {
     handleInputChange(event){
         let val = event.target.value;
         //set value for editItem
-        this.state.media = val;
+        this.media = val;
     }
 
     //search by id or name
     handleSearchChange(event){
         let val = event.target.value;     
-        this.state.searching = val;
+        this.searching = val;
     }
 
         //search item
     handleSearch = async (event) => {
         event.preventDefault();
-        const val = this.state.searching;
+        const val = this.searching;
         const response = await fetch(`/api/media-types/search/${val}`);
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
@@ -89,7 +93,7 @@ class  MediaTypes extends Component {
     //edit item
     async editItem(id, nam) {
         //no modifications are added
-        const val = (this.state.media==='') ? nam : this.state.media;
+        const val = (this.media==='') ? nam : this.media;
   
         const settings = {
           method: 'PUT',
@@ -182,7 +186,6 @@ class  MediaTypes extends Component {
   
                       {/* search results */}
                       <div className="mt-5 hide" id="results">
-                        <p>{this.state.searchResults}</p>
                       </div>
   
                     </Jumbotron>

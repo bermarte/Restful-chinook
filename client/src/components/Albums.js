@@ -7,12 +7,16 @@ import PencilIcon from './PencilIcon';
 
 class  Albums extends Component {
 
-    state = {
-        getAlbums: [],
-        album:'',
-        artist: 0,
-        searching:''
+  constructor(props) { 
+    super(props);   
+    this.album= "";
+    this.artist=0;
+    this.searching="";
+
+    this.state = {
+      getAlbums: []
     }
+  }
 
     getAlbums = async() => {
         const response = await fetch('/api/albums');
@@ -50,27 +54,25 @@ class  Albums extends Component {
     //PUT: title and album id
     handleInputChange(event){
         let val = event.target.value;
-        console.log('text', val);
-        //set value for editItem
-        this.state.album = val;
+        this.album = val;
     }
     handleInputArtistChange(event){
       let val = event.target.value;
       console.log('num', val);
       //set value for editItem
-      this.state.artist = val;
+      this.artist = val;
     }
   
     //search by id or name
     handleSearchChange(event){
         let val = event.target.value;
-        this.state.searching = val;
+        this.searching = val;
     }
 
     //search item
     handleSearch = async (event) => {
         event.preventDefault();
-        const val = this.state.searching;
+        const val = this.searching;
         const response = await fetch(`/api/albums/search/${val}`);
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
@@ -97,8 +99,8 @@ class  Albums extends Component {
     //edit item
     async editItem(id, alb, artid) {
         //no modifications are added
-        const val_album = (this.state.album==='') ? alb : this.state.album;
-        const val_art_id = (this.state.artist===0) ? artid : this.state.artist;
+        const val_album = (this.album==='') ? alb : this.album;
+        const val_art_id = (this.artist===0) ? artid : this.artist;
   
         const settings = {
           method: 'PUT',
@@ -202,7 +204,6 @@ class  Albums extends Component {
 
                     {/* search results */}
                     <div className="mt-5 hide" id="results">
-                      <p>{this.state.searchResults}</p>
                     </div>
 
                   </Jumbotron>

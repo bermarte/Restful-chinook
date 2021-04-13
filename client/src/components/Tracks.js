@@ -8,20 +8,15 @@ import PencilIcon from './PencilIcon';
 
 class  Tracks extends Component {
 
-    state = {
-        getTracks: [],
-        searching:'',
-        editid: 0,
-        track: '',
-        album: 0,
-        media: 0,
-        genre: 0,
-        composer:'',
-        time: 0,
-        bytes: 0,
-        price: 0,
-        filled: false
+  constructor(props) { 
+    super(props);   
+    this.editid= 0;
+    this.searching="";
+
+    this.state = {
+      getTracks: []
     }
+  }
 
     getTracks = async() => {
         const response = await fetch('/api/tracks');
@@ -56,17 +51,16 @@ class  Tracks extends Component {
 
     }
 
-
     //search by id or name
     handleSearchChange(event){
         let val = event.target.value;
-        this.state.searching = val;
+        this.searching = val;
     }
 
     //search item
     handleSearch = async (event) => {
         event.preventDefault();
-        const val = this.state.searching;
+        const val = this.searching;
         const response = await fetch(`/api/tracks/search/${val}`);
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
@@ -104,7 +98,7 @@ class  Tracks extends Component {
     }
 
     async editItem(id) {
-      this.state.editid= id;
+      this.editid= id;
   
         const settings = {
           method: 'GET',
@@ -116,16 +110,6 @@ class  Tracks extends Component {
         try {
           const fetchResponse = await fetch(`http://localhost:8080/api/tracks/search/${id}`, settings);
           const data = await fetchResponse.json();
-
-          this.state.track = data[0].Name;
-          this.state.album = data[0].AlbumId;
-          this.state.media = data[0].MediaTypeId;
-          this.state.genre = data[0].GenreId;
-          this.state.composer = data[0].Composer;
-          this.state.time = data[0].Milliseconds;
-          this.state.bytes = data[0].Bytes;
-          this.state.price = data[0].UnitPrice;
-
           return data;
         } catch (e) {
           alert('error');
@@ -210,7 +194,6 @@ class  Tracks extends Component {
   
                       {/* search results */}
                       <div className="mt-5 hide" id="results">
-                        <p>{this.state.searchResults}</p>
                       </div>
   
                     </Jumbotron>
