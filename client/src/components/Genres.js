@@ -266,7 +266,7 @@ class  Genres extends Component {
                         <Link className="btn btn-secondary btn-sm" role="button" to="/genre/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/genre/search">search</Link>
                         {/* the component should update */}
-                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/genres"}} to="/#">list</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/genres"}} to="/genres">list</Link>
                       </ButtonGroup>
                     </h3>  
                     <Switch>
