@@ -52,10 +52,12 @@ class  MediaTypes extends Component {
     }
 
 
-    handleInputChange(event){
+    handleInputChange(event, id){
         let val = event.target.value;
-        //set value for editItem
-        this.media = val;
+        //set value for editItem, new state
+        const newState = Object.assign({}, this.state);
+        newState.getMediaTypes[id-1].Name = val;
+        //this.media = val;
     }
 
     //search by id or name
@@ -138,9 +140,10 @@ class  MediaTypes extends Component {
                       <input
                       type="text"
                       className="form-control"
-                      id={mediatype.MediaTypeId}
-                      defaultValue={mediatype.Name}
-                      onChange={(event) => this.handleInputChange(event)}
+                      id={`media_${mediatype.MediaTypeId}`}
+                      //defaultValue={mediatype.Name}
+                      defaultValue={getMediaTypes[mediatype.MediaTypeId-1].Name}
+                      onBlur={(event) => this.handleInputChange(event, mediatype.MediaTypeId)}
                       />
                     </td>
                     <td className="align-middle">
@@ -268,7 +271,7 @@ class  MediaTypes extends Component {
                         <Link className="btn btn-secondary btn-sm" role="button" to="/media-type/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/media-type/search">search</Link>
                         {/* the component should update */}
-                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/media-types"}} to="/#">list</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" to="/media-types">list</Link>
                       </ButtonGroup>
                     </h3>  
                     <Switch>

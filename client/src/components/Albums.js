@@ -4,6 +4,7 @@ import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
 import PencilIcon from './PencilIcon';
+import update from 'react-addons-update';
 
 class  Albums extends Component {
 
@@ -26,13 +27,9 @@ class  Albums extends Component {
 
     componentDidMount() {
         this.getAlbums()
-          .then(res => {
-            
-            this.setState({ getAlbums: res });
-            console.log(this.state)
-            
-          })
-          
+          .then(res => {          
+            this.setState({ getAlbums: res });          
+          });      
     }
 
     //delete album by id
@@ -45,7 +42,7 @@ class  Albums extends Component {
           const fetchResponse = await fetch(`http://localhost:8080/api/albums/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
-          window.location.reload();
+          //window.location.reload();
           return data;
         } catch (e) {
           alert('error');
@@ -57,17 +54,15 @@ class  Albums extends Component {
     //PUT: title and album id
     handleInputChange(event, id){
         const val = event.target.value;
-
+        //set value for editItem, new state
         const newState = Object.assign({}, this.state);
         newState.getAlbums[id-1].Title = val;
-        this.setState(newState, () => document.getElementById(event.target.name).focus());
-
     }
-    handleInputArtistChange(event){
+    handleInputArtistChange(event, id){
       let val = event.target.value;
-      console.log('num', val);
-      //set value for editItem
-      this.artist = val;
+      //set value for editItem, new state
+      const newState = Object.assign({}, this.state);
+      newState.getAlbums[id-1].ArtistId = val;
     }
   
     //search by id or name
@@ -153,12 +148,8 @@ class  Albums extends Component {
                     type="text"
                     className="form-control"
                     id={`album_${album.AlbumId}`}
-                    //state
-                    value={getAlbums[`${album.AlbumId-1}`].Title}
-                    name={`album_${album.AlbumId}`}
-
-                    //'album'
-                    onChange={(event) => this.handleInputChange(event, album.AlbumId)}
+                    defaultValue={getAlbums[album.AlbumId-1].Title}
+                    onBlur={(event) => this.handleInputChange(event, album.AlbumId)}
                     />
                   </td>
                   <td>
@@ -166,8 +157,8 @@ class  Albums extends Component {
                         type="number"
                         className="form-control col-sm-4 artist-td"
                         id={`artist_${album.AlbumId}`}
-                        value={getAlbums[`${album.AlbumId-1}`].ArtistId}
-                        onChange={(event) => this.handleInputArtistChange(event)}
+                        defaultValue={getAlbums[`${album.AlbumId-1}`].ArtistId}
+                        onChange={(event) => this.handleInputArtistChange(event, album.AlbumId)}
                         min="1" max="10000"
                     />
                   </td>
