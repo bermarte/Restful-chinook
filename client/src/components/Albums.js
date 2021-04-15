@@ -4,7 +4,6 @@ import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Preloader from './Preloader';
 import PencilIcon from './PencilIcon';
-import update from 'react-addons-update';
 
 class  Albums extends Component {
 

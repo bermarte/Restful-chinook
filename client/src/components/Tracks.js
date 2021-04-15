@@ -145,15 +145,15 @@ class  Tracks extends Component {
 
                 { getTracks.map(track =>
                     <tr key={track.TrackId}>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.TrackId}</td>
-                        <td className="align-middle text-truncate2" style={columnStyle}>{track.Name}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.AlbumId}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.MediaTypeId}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.GenreId}</td>
-                        <td className="align-middle text-truncate" style={columnStyle}>{track.Composer}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.Milliseconds}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.Bytes}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{track.UnitPrice}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].TrackId}</td>
+                        <td className="align-middle text-truncate2" style={columnStyle}>{getTracks[track.TrackId-1].Name}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].AlbumId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].MediaTypeId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].GenreId}</td>
+                        <td className="align-middle text-truncate" style={columnStyle}>{getTracks[track.TrackId-1].Composer}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].Milliseconds}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].Bytes}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].UnitPrice}</td>
                         <td className="align-middle">
                         <ButtonGroup>
                           <Link className="btn btn-primary btn-sm" role="button" to={`/track/edit/${track.TrackId}`}> <PencilIcon /> </Link>
@@ -324,7 +324,6 @@ class  Tracks extends Component {
         };
 
         // edit row
-        //add new album
         const EditTrack = (props) => {
 
           //get the id in the url provided by props
@@ -351,8 +350,8 @@ class  Tracks extends Component {
 
           getData();
 
-          function TrackListForm() {
-            
+          const TrackListForm = () => {
+            console.log('me', this.state)//error
             //edit item submit
             const handleSubmit = (event) => {
               
@@ -369,10 +368,20 @@ class  Tracks extends Component {
               saveTracklist(vals);
 
             };
-
+        
             // edit track
-
             const saveTracklist = async (arr) => {
+
+              //update state
+              const newState = Object.assign({}, this.state);
+              newState.getTracks[arr[0]-1].Name = arr[1];
+              newState.getTracks[arr[0]-1].AlbumId = arr[2];
+              newState.getTracks[arr[0]-1].MediaTypeId = arr[3];
+              newState.getTracks[arr[0]-1].GenreId = arr[4];
+              newState.getTracks[arr[0]-1].Composer = arr[5];
+              newState.getTracks[arr[0]-1].Milliseconds = arr[6];
+              newState.getTracks[arr[0]-1].Bytes = arr[7];
+              newState.getTracks[arr[0]-1].UnitPrice = arr[8];
 
               const settings = {
                 method: 'PUT',
@@ -554,7 +563,7 @@ class  Tracks extends Component {
                             <Link className="btn btn-secondary btn-sm" role="button" to="/track/add">add</Link>
                             <Link className="btn btn-secondary btn-sm" role="button" to="/track/search">search</Link>
                             {/* the component should update */}
-                            <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/tracks"}} to="/#">list</Link>
+                            <Link className="btn btn-secondary btn-sm" role="button" to="/tracks">list</Link>
                           </ButtonGroup>
                         </h3>  
                         <Switch>
