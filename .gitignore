@@ -106,4 +106,10 @@ dist
 # db
 db/chinook.sqlite
 db/
+./db
+db
+./db/
+./db
+./db/*
+
 access.log

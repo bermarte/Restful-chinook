@@ -351,7 +351,6 @@ class  Tracks extends Component {
           getData();
 
           const TrackListForm = () => {
-            console.log('me', this.state)//error
             //edit item submit
             const handleSubmit = (event) => {
               
