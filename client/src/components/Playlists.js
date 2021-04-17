@@ -33,7 +33,7 @@ class  Playlists extends Component {
     }
 
     //delete playlist by id
-    deleteItem = async (item) => {
+    deleteItem = async (item, indx) => {
 
       const settings = {
         method: 'DELETE'
@@ -42,7 +42,11 @@ class  Playlists extends Component {
         const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${item}`, settings);
         const data = await fetchResponse.json();
         alert('item deleted');
-        window.location.reload();
+        
+        const newState = Object.assign({}, this.state);
+        newState.getPlaylists.splice(indx,1);
+        this.props.history.push('/playlists');
+
         return data;
       } catch (e) {
         alert('error');
@@ -129,23 +133,23 @@ class  Playlists extends Component {
                 </tr>
               </thead>
               <tbody>
-              { getPlaylists.map(playlist => 
-                <tr key={playlist.PlaylistId}>
+              { getPlaylists.map((playlist,index) => 
+                <tr key={index+1}>
                   <td className="align-middle">{playlist.PlaylistId}</td>
                   <td>
                     <input
                     type="text"
                     className="form-control"
-                    id={playlist.PlaylistId}
-                    defaultValue={playlist.Name}
-                    onChange={(event) => this.handleInputChange(event)}
+                    id={`playlist_${playlist.PlaylistId}`}
+                    defaultValue={getPlaylists[index].Name}
+                    onBlur={(event) => this.handleInputChange(event, playlist.PlaylistId)}
                     />
                   </td>
                   <td className="align-middle">
                     <ButtonGroup>
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(playlist.PlaylistId, playlist.Name)}> <PencilIcon /> </Button>
                       {/* to="/playlist/add" */}
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId)}>X</Button> 
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(playlist.PlaylistId, index)}>X</Button> 
                       {/* to="/playlist/search" */}
                     </ButtonGroup>
                   </td>

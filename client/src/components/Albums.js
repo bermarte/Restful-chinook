@@ -41,7 +41,7 @@ class  Albums extends Component {
           const fetchResponse = await fetch(`http://localhost:8080/api/albums/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
-          
+     
           const newState = Object.assign({}, this.state);
           newState.getAlbums.splice(indx,1);
           this.props.history.push('/albums');               

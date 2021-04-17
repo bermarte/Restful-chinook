@@ -33,7 +33,7 @@ class  Tracks extends Component {
     }
 
      //delete album by id
-    deleteItem = async (item) => {
+    deleteItem = async (item, indx) => {
 
         const settings = {
           method: 'DELETE'
@@ -42,7 +42,11 @@ class  Tracks extends Component {
           const fetchResponse = await fetch(`http://localhost:8080/api/tracks/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
-          window.location.reload();
+          
+          const newState = Object.assign({}, this.state);
+          newState.getTracks.splice(indx,1);
+          this.props.history.push('/tracks'); 
+
           return data;
         } catch (e) {
           alert('error');
@@ -143,21 +147,21 @@ class  Tracks extends Component {
                 </thead>
                 <tbody>
 
-                { getTracks.map(track =>
-                    <tr key={track.TrackId}>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].TrackId}</td>
-                        <td className="align-middle text-truncate2" style={columnStyle}>{getTracks[track.TrackId-1].Name}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].AlbumId}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].MediaTypeId}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].GenreId}</td>
-                        <td className="align-middle text-truncate" style={columnStyle}>{getTracks[track.TrackId-1].Composer}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].Milliseconds}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].Bytes}</td>
-                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[track.TrackId-1].UnitPrice}</td>
+                { getTracks.map((track,index) =>
+                    <tr key={index+1}>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].TrackId}</td>
+                        <td className="align-middle text-truncate2" style={columnStyle}>{getTracks[index].Name}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].AlbumId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].MediaTypeId}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].GenreId}</td>
+                        <td className="align-middle text-truncate" style={columnStyle}>{getTracks[index].Composer}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].Milliseconds}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].Bytes}</td>
+                        <td className="align-middle text-truncate" style={columnStyleSmall}>{getTracks[index].UnitPrice}</td>
                         <td className="align-middle">
                         <ButtonGroup>
                           <Link className="btn btn-primary btn-sm" role="button" to={`/track/edit/${track.TrackId}`}> <PencilIcon /> </Link>
-                          <Button className="btn btn-primary btn-sm" role="button" onClick={() => this.deleteItem(track.TrackId)}>X</Button> 
+                          <Button className="btn btn-primary btn-sm" role="button" onClick={() => this.deleteItem(track.TrackId, index)}>X</Button> 
                         </ButtonGroup>
                         </td>
                     </tr>) }

@@ -33,7 +33,7 @@ class  MediaTypes extends Component {
     }
 
     //delete mediatype by id
-    deleteItem = async (item) => {
+    deleteItem = async (item, indx) => {
 
         const settings = {
           method: 'DELETE'
@@ -42,7 +42,11 @@ class  MediaTypes extends Component {
           const fetchResponse = await fetch(`http://localhost:8080/api/media-types/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
-          window.location.reload();
+          
+          const newState = Object.assign({}, this.state);
+          newState.getMediaTypes.splice(indx,1);
+          this.props.history.push('/media-types');  
+          
           return data;
         } catch (e) {
           alert('error');
@@ -133,8 +137,8 @@ class  MediaTypes extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                { getMediaTypes.map(mediatype => 
-                  <tr key={mediatype.MediaTypeId}>
+                { getMediaTypes.map((mediatype,index) => 
+                  <tr key={index+1}>
                     <td className="align-middle">{mediatype.MediaTypeId}</td>
                     <td>
                       <input
@@ -142,7 +146,7 @@ class  MediaTypes extends Component {
                       className="form-control"
                       id={`media_${mediatype.MediaTypeId}`}
                       //defaultValue={mediatype.Name}
-                      defaultValue={getMediaTypes[mediatype.MediaTypeId-1].Name}
+                      defaultValue={getMediaTypes[index].Name}
                       onBlur={(event) => this.handleInputChange(event, mediatype.MediaTypeId)}
                       />
                     </td>
@@ -150,7 +154,7 @@ class  MediaTypes extends Component {
                       <ButtonGroup>
                         <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(mediatype.MediaTypeId, mediatype.Name)}> <PencilIcon /> </Button>
                         {/* to="/playlist/add" */}
-                        <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(mediatype.MediaTypeId)}>X</Button> 
+                        <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(mediatype.MediaTypeId, index)}>X</Button> 
                         {/* to="/playlist/search" */}
                       </ButtonGroup>
                     </td>
