@@ -206,7 +206,7 @@ class  MediaTypes extends Component {
         //add new playlist
         const AddMediaTypelist = () => {
 
-            function MediaTypeListForm() {
+            const MediaTypeListForm = () => {
   
               //state using hook
               const [mediatypeName,setMediatypeName] = useState();
@@ -234,6 +234,11 @@ class  MediaTypes extends Component {
                   const fetchResponse = await fetch(`http://localhost:8080/api/media-types`, settings);
                   const data = await fetchResponse.json();
                   alert('new item added');
+
+                  const newState = Object.assign({}, this.state);
+                  const newId = newState.getMediaTypes.length+1;
+                  newState.getMediaTypes.push({MediaTypeId: newId, Name: list});
+
                   return data;
                 } catch (e) {
                   alert('error');

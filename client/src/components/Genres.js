@@ -225,7 +225,7 @@ class Genres extends Component {
         //add new genre
         const AddGenrelist = () => {
 
-            function GenreListForm() {
+            const GenreListForm = () => {
 
                 //state using hook
                 const [genrelistName,
@@ -254,6 +254,16 @@ class Genres extends Component {
                         const fetchResponse = await fetch(`http://localhost:8080/api/genres`, settings);
                         const data = await fetchResponse.json();
                         alert('new item added');
+                        
+                        /* here 
+                        let data = body[0].Name;
+                        let id = body[0].GenreId;
+                        
+                        */
+                        const newState = Object.assign({}, this.state);
+                        const newId = newState.getGenreslists.length+1;
+                        newState.getGenreslists.push({GenreId: newId, Name: list});
+
                         return data;
                     } catch (e) {
                         alert('error');

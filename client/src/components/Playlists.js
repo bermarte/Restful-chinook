@@ -201,7 +201,7 @@ class  Playlists extends Component {
         //add new playlist
         const AddPlaylist = () => {
 
-          function PlayListForm() {
+          const PlayListForm = () => {
 
             //state using hook
             const [playlistName,setPlaylistName] = useState();
@@ -229,6 +229,15 @@ class  Playlists extends Component {
                 const fetchResponse = await fetch(`http://localhost:8080/api/playlists`, settings);
                 const data = await fetchResponse.json();
                 alert('new item added');
+
+                const newState = Object.assign({}, this.state);
+                const newId = newState.getPlaylists.length+1;
+                /*
+                let data = body[0].Name;
+                let id = body[0].PlaylistId;
+                */
+                newState.getPlaylists.push({PlaylistId: newId, Name: list});
+
                 return data;
               } catch (e) {
                 alert('error');
