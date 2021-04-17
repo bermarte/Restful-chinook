@@ -32,7 +32,7 @@ class  Albums extends Component {
     }
 
     //delete album by id
-    deleteItem = async (item) => {
+    deleteItem = async (item, indx) => {
 
         const settings = {
           method: 'DELETE'
@@ -42,17 +42,9 @@ class  Albums extends Component {
           const data = await fetchResponse.json();
           alert('item deleted');
           
-
-          console.log('hey',item)
-
           const newState = Object.assign({}, this.state);
-          newState.getAlbums.splice(item-1,1);
-
-          console.log(newState)
-
-          this.props.history.push('/albums');
-          
-          
+          newState.getAlbums.splice(indx,1);
+          this.props.history.push('/albums');               
 
           return data;
         } catch (e) {
@@ -179,7 +171,7 @@ class  Albums extends Component {
                     <ButtonGroup>
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}> <PencilIcon /> </Button>
                       {/* to="/playlist/add" */}
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId)}>X</Button> 
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId, index)}>X</Button> 
                       {/* to="/playlist/search" */}
                     </ButtonGroup>
                   </td>
