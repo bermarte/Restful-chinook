@@ -44,7 +44,7 @@ class Genres extends Component {
     }
 
     //delete playlist by id
-    deleteItem = async(item) => {
+    deleteItem = async(item,indx) => {
 
         const settings = {
             method: 'DELETE'
@@ -53,9 +53,11 @@ class Genres extends Component {
             const fetchResponse = await fetch(`http://localhost:8080/api/genres/${item}`, settings);
             const data = await fetchResponse.json();
             alert('item deleted');
-            window
-                .location
-                .reload();
+
+            const newState = Object.assign({}, this.state);
+            newState.getGenreslists.splice(indx,1);
+            this.props.history.push('/genres');
+
             return data;
         } catch (e) {
             alert('error');
@@ -151,14 +153,14 @@ class Genres extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {getGenreslists.map(genre => <tr key={genre.GenreId}>
+                        {getGenreslists.map((genre,index) => <tr key={index+1}>
                             <td className="align-middle">{genre.GenreId}</td>
                             <td>
                                 <input
                                     type="text"
                                     className="form-control"
                                     id={`genre_${genre.GenreId}`}
-                                    defaultValue={getGenreslists[genre.GenreId - 1].Name}
+                                    defaultValue={getGenreslists[index].Name}
                                     onBlur={(event) => this.handleInputChange(event, genre.GenreId)}/>
                             </td>
                             <td className="align-middle">
@@ -173,7 +175,7 @@ class Genres extends Component {
                                     <Button
                                         className="btn btn-secondary btn-sm"
                                         role="button"
-                                        onClick={() => this.deleteItem(genre.GenreId)}>X</Button>
+                                        onClick={() => this.deleteItem(genre.GenreId, index)}>X</Button>
                                     {/* to="/playlist/search" */}
                                 </ButtonGroup>
                             </td>

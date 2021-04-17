@@ -32,7 +32,7 @@ class  Albums extends Component {
     }
 
     //delete album by id
-    deleteItem = async (item) => {
+    deleteItem = async (item, indx) => {
 
         const settings = {
           method: 'DELETE'
@@ -41,7 +41,11 @@ class  Albums extends Component {
           const fetchResponse = await fetch(`http://localhost:8080/api/albums/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
-          //window.location.reload();
+     
+          const newState = Object.assign({}, this.state);
+          newState.getAlbums.splice(indx,1);
+          this.props.history.push('/albums');               
+
           return data;
         } catch (e) {
           alert('error');
@@ -139,15 +143,17 @@ class  Albums extends Component {
                 </tr>
               </thead>
               <tbody>
-              { getAlbums.map(album => 
-                <tr key={album.AlbumId}>
+              { getAlbums.map((album,index) => 
+              
+                <tr key={index+1}>
                   <td className="align-middle">{album.AlbumId}</td>
                   <td>
+                   
                     <input
                     type="text"
                     className="form-control"
                     id={`album_${album.AlbumId}`}
-                    defaultValue={getAlbums[album.AlbumId-1].Title}
+                    defaultValue={getAlbums[index].Title}
                     onBlur={(event) => this.handleInputChange(event, album.AlbumId)}
                     />
                   </td>
@@ -156,7 +162,7 @@ class  Albums extends Component {
                         type="number"
                         className="form-control col-sm-4 artist-td"
                         id={`artist_${album.AlbumId}`}
-                        defaultValue={getAlbums[`${album.AlbumId-1}`].ArtistId}
+                        defaultValue={getAlbums[index].ArtistId}
                         onChange={(event) => this.handleInputArtistChange(event, album.AlbumId)}
                         min="1" max="10000"
                     />
@@ -165,7 +171,7 @@ class  Albums extends Component {
                     <ButtonGroup>
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}> <PencilIcon /> </Button>
                       {/* to="/playlist/add" */}
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId)}>X</Button> 
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId, index)}>X</Button> 
                       {/* to="/playlist/search" */}
                     </ButtonGroup>
                   </td>
