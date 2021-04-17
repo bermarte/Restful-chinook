@@ -44,7 +44,7 @@ class Genres extends Component {
     }
 
     //delete playlist by id
-    deleteItem = async(item,indx) => {
+    deleteItem = async(item, indx) => {
 
         const settings = {
             method: 'DELETE'
@@ -55,8 +55,13 @@ class Genres extends Component {
             alert('item deleted');
 
             const newState = Object.assign({}, this.state);
-            newState.getGenreslists.splice(indx,1);
-            this.props.history.push('/genres');
+            newState
+                .getGenreslists
+                .splice(indx, 1);
+            this
+                .props
+                .history
+                .push('/genres');
 
             return data;
         } catch (e) {
@@ -116,7 +121,9 @@ class Genres extends Component {
     //edit item
     async editItem(id, nam) {
         //no modifications are added
-        const val = (this.genre === '')? nam: this.genre;
+        const val = (this.genre === '')
+            ? nam
+            : this.genre;
 
         const settings = {
             method: 'PUT',
@@ -153,7 +160,7 @@ class Genres extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {getGenreslists.map((genre,index) => <tr key={index+1}>
+                        {getGenreslists.map((genre, index) => <tr key={index + 1}>
                             <td className="align-middle">{genre.GenreId}</td>
                             <td>
                                 <input
@@ -184,7 +191,9 @@ class Genres extends Component {
                     </tbody>
                 </Table>
                 {/* preloader */}
-                {getGenreslists.length < 1? <Preloader/>: ''}
+                {getGenreslists.length < 1
+                    ? <Preloader/>
+                    : ''}
             </Row>
         );
 
@@ -254,15 +263,17 @@ class Genres extends Component {
                         const fetchResponse = await fetch(`http://localhost:8080/api/genres`, settings);
                         const data = await fetchResponse.json();
                         alert('new item added');
-                        
-                        /* here 
+
+                        /* here
                         let data = body[0].Name;
                         let id = body[0].GenreId;
-                        
+
                         */
                         const newState = Object.assign({}, this.state);
-                        const newId = newState.getGenreslists.length+1;
-                        newState.getGenreslists.push({GenreId: newId, Name: list});
+                        const newId = newState.getGenreslists.length + 1;
+                        newState
+                            .getGenreslists
+                            .push({GenreId: newId, Name: list});
 
                         return data;
                     } catch (e) {
