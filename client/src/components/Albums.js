@@ -44,7 +44,7 @@ class  Albums extends Component {
      
           const newState = Object.assign({}, this.state);
           newState.getAlbums.splice(indx,1);
-          this.props.history.push('/albums');               
+          this.props.history.push('/albums');           
 
           return data;
         } catch (e) {
@@ -148,7 +148,7 @@ class  Albums extends Component {
                 <tr key={index+1}>
                   <td className="align-middle">{album.AlbumId}</td>
                   <td>
-                   
+
                     <input
                     type="text"
                     className="form-control"
@@ -224,7 +224,7 @@ class  Albums extends Component {
         //add new album
         const AddAlbum = () => {
 
-          function AlbumListForm() {
+          const AlbumListForm = () => {
 
             //state using hook
             const [albumTitle,setAlbumTitle] = useState();
@@ -258,6 +258,11 @@ class  Albums extends Component {
                 const fetchResponse = await fetch(`http://localhost:8080/api/albums`, settings);
                 const data = await fetchResponse.json();
                 alert('new item added');
+
+                const newState = Object.assign({}, this.state);
+                const newId = newState.getAlbums.length+1;
+                newState.getAlbums.push({AlbumId: newId, ArtistId: artistid, Title: albumtitle});
+
                 return data;
               } catch (e) {
                 alert('error');
