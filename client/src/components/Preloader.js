@@ -1,9 +1,9 @@
 import '../App.css';
 import React from 'react';
-import { Spinner } from 'react-bootstrap';
+import {Spinner} from 'react-bootstrap';
 
 const Preloader = () => {
-    return(
+    return (
         <div className="preloader-container">
             <div className="preloader">
                 <Spinner animation="border" role="status">
@@ -11,7 +11,7 @@ const Preloader = () => {
                 </Spinner>
             </div>
         </div>
-   );
+    );
 }
 
 export default Preloader;
