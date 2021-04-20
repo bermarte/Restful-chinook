@@ -9,8 +9,6 @@ class  Albums extends Component {
 
   constructor(props) { 
     super(props);   
-    this.album= "";
-    this.artist=0;
     this.searching="";
     this.state = {
       getAlbums: []
@@ -103,9 +101,6 @@ class  Albums extends Component {
 
     //edit item
     async editItem(id, alb, artid) {
-        //no modifications are added
-        const val_album = (this.album==='') ? alb : this.album;
-        const val_art_id = (this.artist===0) ? artid : this.artist;
   
         const settings = {
           method: 'PUT',
@@ -113,7 +108,7 @@ class  Albums extends Component {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({title: val_album, artistid: val_art_id})
+          body: JSON.stringify({title: alb, artistid: artid})
         };
         try {
           const fetchResponse = await fetch(`http://localhost:8080/api/albums/${id}`, settings);
@@ -170,9 +165,7 @@ class  Albums extends Component {
                   <td className="align-middle">
                     <ButtonGroup>
                       <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(album.AlbumId, album.Title, album.ArtistId)}> <PencilIcon /> </Button>
-                      {/* to="/playlist/add" */}
-                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId, index)}>X</Button> 
-                      {/* to="/playlist/search" */}
+                      <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(album.AlbumId, index)}>X</Button>
                     </ButtonGroup>
                   </td>
                   
@@ -193,7 +186,6 @@ class  Albums extends Component {
               <Row className="justify-content-md-center">
                 <Col xs lg="6">
                   <Jumbotron>
-                  {/* onSubmit={handleSearch} */}
                     <Form onSubmit={(event) => this.handleSearch(event)}>
                       <Form.Group>
                         <Form.Label>Search by id or by name</Form.Label>
@@ -305,7 +297,6 @@ class  Albums extends Component {
                       <ButtonGroup className="ml-2">
                         <Link className="btn btn-secondary btn-sm" role="button" to="/album/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/album/search">search</Link>
-                        {/* the component should update */}
                         <Link className="btn btn-secondary btn-sm" role="button" to="/albums">list</Link>
                       </ButtonGroup>
                     </h3>  
