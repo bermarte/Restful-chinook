@@ -39,7 +39,7 @@ const controllers = {
   },
   getOneByName: (req, res) => {
 
-    const sql = `SELECT * FROM  WHERE Name =  "${req.params.item}"`;
+    const sql = `SELECT * FROM media_types WHERE Name =  "${req.params.item}"`;
     db.all(sql, (err, rows) => {
       if (err) {
         res.status(400).json({

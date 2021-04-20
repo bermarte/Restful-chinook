@@ -18,7 +18,6 @@ class Genres extends Component {
 
     constructor(props) {
         super(props);
-        this.genre = "";
         this.searching = "";
 
         this.state = {
@@ -44,7 +43,7 @@ class Genres extends Component {
     }
 
     //delete playlist by id
-    deleteItem = async(item, indx) => {
+    deleteItem = async(item,indx) => {
 
         const settings = {
             method: 'DELETE'
@@ -55,13 +54,8 @@ class Genres extends Component {
             alert('item deleted');
 
             const newState = Object.assign({}, this.state);
-            newState
-                .getGenreslists
-                .splice(indx, 1);
-            this
-                .props
-                .history
-                .push('/genres');
+            newState.getGenreslists.splice(indx,1);
+            this.props.history.push('/genres');
 
             return data;
         } catch (e) {
@@ -120,10 +114,6 @@ class Genres extends Component {
 
     //edit item
     async editItem(id, nam) {
-        //no modifications are added
-        const val = (this.genre === '')
-            ? nam
-            : this.genre;
 
         const settings = {
             method: 'PUT',
@@ -131,7 +121,7 @@ class Genres extends Component {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name: val})
+            body: JSON.stringify({name: nam})
         };
         try {
             const fetchResponse = await fetch(`http://localhost:8080/api/genres/${id}`, settings);
@@ -160,7 +150,7 @@ class Genres extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {getGenreslists.map((genre, index) => <tr key={index + 1}>
+                        {getGenreslists.map((genre,index) => <tr key={index+1}>
                             <td className="align-middle">{genre.GenreId}</td>
                             <td>
                                 <input
@@ -178,12 +168,10 @@ class Genres extends Component {
                                         onClick={() => this.editItem(genre.GenreId, genre.Name)}>
                                         <PencilIcon/>
                                     </Button>
-                                    {/* to="/playlist/add" */}
                                     <Button
                                         className="btn btn-secondary btn-sm"
                                         role="button"
                                         onClick={() => this.deleteItem(genre.GenreId, index)}>X</Button>
-                                    {/* to="/playlist/search" */}
                                 </ButtonGroup>
                             </td>
                         </tr>)
@@ -191,9 +179,7 @@ class Genres extends Component {
                     </tbody>
                 </Table>
                 {/* preloader */}
-                {getGenreslists.length < 1
-                    ? <Preloader/>
-                    : ''}
+                {getGenreslists.length < 1? <Preloader/>: ''}
             </Row>
         );
 
@@ -205,7 +191,6 @@ class Genres extends Component {
                     <Row className="justify-content-md-center">
                         <Col xs lg="6">
                             <Jumbotron>
-                                {/* onSubmit={handleSearch} */}
                                 <Form onSubmit={(event) => this.handleSearch(event)}>
                                     <Form.Group>
                                         <Form.Label>Search by id or by name</Form.Label>
@@ -263,17 +248,10 @@ class Genres extends Component {
                         const fetchResponse = await fetch(`http://localhost:8080/api/genres`, settings);
                         const data = await fetchResponse.json();
                         alert('new item added');
-
-                        /* here
-                        let data = body[0].Name;
-                        let id = body[0].GenreId;
-
-                        */
+                        
                         const newState = Object.assign({}, this.state);
-                        const newId = newState.getGenreslists.length + 1;
-                        newState
-                            .getGenreslists
-                            .push({GenreId: newId, Name: list});
+                        const newId = newState.getGenreslists.length+1;
+                        newState.getGenreslists.push({GenreId: newId, Name: list});
 
                         return data;
                     } catch (e) {
@@ -320,7 +298,6 @@ class Genres extends Component {
                             <ButtonGroup className="ml-2">
                                 <Link className="btn btn-secondary btn-sm" role="button" to="/genre/add">add</Link>
                                 <Link className="btn btn-secondary btn-sm" role="button" to="/genre/search">search</Link>
-                                {/* the component should update */}
                                 <Link className="btn btn-secondary btn-sm" role="button" to="/genres">list</Link>
                             </ButtonGroup>
                         </h3>
