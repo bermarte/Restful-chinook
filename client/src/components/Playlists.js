@@ -65,12 +65,24 @@ class  Playlists extends Component {
       let val = event.target.value;     
       this.searching = val;
     }
+
+    //AC%2FDC => AC/DC
+    HtmlEncode = (str) => {
+        const arr = [];
+        for (let n = 0, l = str.length; n < l; n ++){
+            const hex = Number(str.charCodeAt(n)).toString(16);
+            arr.push(hex);
+        }
+        const s = arr.join('%');
+        return `%${s}`
+    }
     
     //search item
     handleSearch = async (event) => {
       event.preventDefault();
       const val = this.searching;
-      const response = await fetch(`/api/playlists/search/${val}`);
+      const encVal = this.HtmlEncode(val);
+      const response = await fetch(`/api/playlists/search/${encVal}`);
       const body = await response.json();
       if (response.status !== 200) throw Error(body.message);
 

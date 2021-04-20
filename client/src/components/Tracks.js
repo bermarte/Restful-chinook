@@ -78,11 +78,23 @@ class Tracks extends Component {
         this.searching = val;
     }
 
+    //AC%2FDC => AC/DC
+    HtmlEncode = (str) => {
+        const arr = [];
+        for (let n = 0, l = str.length; n < l; n ++){
+            const hex = Number(str.charCodeAt(n)).toString(16);
+            arr.push(hex);
+        }
+        const s = arr.join('%');
+        return `%${s}`
+    }
+
     //search item
     handleSearch = async(event) => {
         event.preventDefault();
         const val = this.searching;
-        const response = await fetch(`/api/tracks/search/${val}`);
+        const encVal = this.HtmlEncode(val);
+        const response = await fetch(`/api/tracks/search/${encVal}`);
         const body = await response.json();
         if (response.status !== 200) 
             throw Error(body.message);
@@ -93,7 +105,7 @@ class Tracks extends Component {
         } else {
             let data = body[0].Name;
             let id = body[0].TrackId;
-            let albumid = body[0].ArtistId;
+            let albumid = body[0].AlbumId;
             let mediatype = body[0].MediaTypeId;
             let genreid = body[0].GenreId;
             let composer = body[0].Composer;
