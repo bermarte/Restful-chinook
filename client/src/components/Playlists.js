@@ -9,7 +9,6 @@ class  Playlists extends Component {
 
   constructor(props) { 
     super(props);   
-    this.play= "";
     this.searching="";
 
     this.state = {
@@ -55,10 +54,10 @@ class  Playlists extends Component {
 
     } 
 
-    handleInputChange(event){
+    handleInputChange(event, id){
       let val = event.target.value;
-      //set value for editItem
-      this.play = val;
+      const newState = Object.assign({}, this.state);
+      newState.getPlaylists[id - 1].Name = val;
     }  
 
     //search by id or name
@@ -96,7 +95,7 @@ class  Playlists extends Component {
     //edit item
     async editItem(id, nam) {
       //no modifications are added
-      const val = (this.play==='') ? nam : this.play;
+      //const val = (this.play==='') ? nam : this.play;
 
       const settings = {
         method: 'PUT',
@@ -104,7 +103,7 @@ class  Playlists extends Component {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name: val})
+        body: JSON.stringify({name: nam})
       };
       try {
         const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${id}`, settings);
@@ -232,10 +231,6 @@ class  Playlists extends Component {
 
                 const newState = Object.assign({}, this.state);
                 const newId = newState.getPlaylists.length+1;
-                /*
-                let data = body[0].Name;
-                let id = body[0].PlaylistId;
-                */
                 newState.getPlaylists.push({PlaylistId: newId, Name: list});
 
                 return data;
@@ -279,8 +274,7 @@ class  Playlists extends Component {
                       <ButtonGroup className="ml-2">
                         <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/playlist/search">search</Link>
-                        {/* the component should update */}
-                        <Link className="btn btn-secondary btn-sm" role="button" onClick={() => {window.location.href="/playlists"}} to="/#">list</Link>
+                        <Link className="btn btn-secondary btn-sm" role="button" to="/playlists">list</Link>
                       </ButtonGroup>
                     </h3>  
                     <Switch>

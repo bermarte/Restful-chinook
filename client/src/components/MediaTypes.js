@@ -9,7 +9,6 @@ class  MediaTypes extends Component {
 
   constructor(props) { 
     super(props);   
-    this.media= "";
     this.searching="";
 
     this.state = {
@@ -61,7 +60,6 @@ class  MediaTypes extends Component {
         //set value for editItem, new state
         const newState = Object.assign({}, this.state);
         newState.getMediaTypes[id-1].Name = val;
-        //this.media = val;
     }
 
     //search by id or name
@@ -70,13 +68,14 @@ class  MediaTypes extends Component {
         this.searching = val;
     }
 
-        //search item
+    //search item
     handleSearch = async (event) => {
         event.preventDefault();
         const val = this.searching;
         const response = await fetch(`/api/media-types/search/${val}`);
         const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
+        if (response.status !== 200)
+          throw Error(body.message);
     
         let message;
         if (body.error) {
@@ -98,8 +97,6 @@ class  MediaTypes extends Component {
 
     //edit item
     async editItem(id, nam) {
-        //no modifications are added
-        const val = (this.media==='') ? nam : this.media;
   
         const settings = {
           method: 'PUT',
@@ -107,7 +104,7 @@ class  MediaTypes extends Component {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({name: val})
+          body: JSON.stringify({name: nam})
         };
         try {
           const fetchResponse = await fetch(`http://localhost:8080/api/media-types/${id}`, settings);
@@ -145,7 +142,6 @@ class  MediaTypes extends Component {
                       type="text"
                       className="form-control"
                       id={`media_${mediatype.MediaTypeId}`}
-                      //defaultValue={mediatype.Name}
                       defaultValue={getMediaTypes[index].Name}
                       onBlur={(event) => this.handleInputChange(event, mediatype.MediaTypeId)}
                       />
@@ -153,9 +149,7 @@ class  MediaTypes extends Component {
                     <td className="align-middle">
                       <ButtonGroup>
                         <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.editItem(mediatype.MediaTypeId, mediatype.Name)}> <PencilIcon /> </Button>
-                        {/* to="/playlist/add" */}
                         <Button className="btn btn-secondary btn-sm" role="button" onClick={() => this.deleteItem(mediatype.MediaTypeId, index)}>X</Button> 
-                        {/* to="/playlist/search" */}
                       </ButtonGroup>
                     </td>
                   </tr>)
@@ -175,7 +169,6 @@ class  MediaTypes extends Component {
                 <Row className="justify-content-md-center">
                   <Col xs lg="6">
                     <Jumbotron>
-                    {/* onSubmit={handleSearch} */}
                       <Form onSubmit={(event) => this.handleSearch(event)}>
                         <Form.Group>
                           <Form.Label>Search by id or by name</Form.Label>
@@ -190,7 +183,6 @@ class  MediaTypes extends Component {
                           Search
                         </Button>
                       </Form>
-  
                       {/* search results */}
                       <div className="mt-5 hide" id="results">
                       </div>
@@ -221,7 +213,7 @@ class  MediaTypes extends Component {
                 setMediatypeName(event.target.value);
               };
   
-              const saveMediaTypelist = async (list) => {
+              const saveMediaTypelist = async(list) => {
                 const settings = {
                   method: 'POST',
                   headers: {
@@ -279,7 +271,6 @@ class  MediaTypes extends Component {
                       <ButtonGroup className="ml-2">
                         <Link className="btn btn-secondary btn-sm" role="button" to="/media-type/add">add</Link>
                         <Link className="btn btn-secondary btn-sm" role="button" to="/media-type/search">search</Link>
-                        {/* the component should update */}
                         <Link className="btn btn-secondary btn-sm" role="button" to="/media-types">list</Link>
                       </ButtonGroup>
                     </h3>  
