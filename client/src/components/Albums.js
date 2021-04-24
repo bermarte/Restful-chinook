@@ -126,7 +126,7 @@ class  Albums extends Component {
 
     //get name of the artist
     getName = (item) => {     
-        if (item ) return item.Name;
+        if (item) return item.Name;
     }  
 
     //edit item
@@ -172,7 +172,7 @@ class  Albums extends Component {
               
                 <tr key={index+1}>
                   <td className="align-middle">{album.AlbumId}</td>
-                  <td>
+                  <td className="align-middle">
 
                     <input
                     type="text"
@@ -183,10 +183,12 @@ class  Albums extends Component {
                     />
                   </td>
                   <td>
-                    <div className={`artist-${getAlbums[index].ArtistId}`}>
+                    <div>
+                      <span className="artist pr-2 pl-2">
                       {
                         this.getName(getArtists.find(e => e.ArtistId === getAlbums[index].ArtistId))
                       }
+                      </span>
                     </div>
                     <input
                         type="number"
