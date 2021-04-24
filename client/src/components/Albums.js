@@ -11,7 +11,8 @@ class  Albums extends Component {
     super(props);   
     this.searching="";
     this.state = {
-      getAlbums: []
+      getAlbums: [],
+      getArtists: []
     }
   }
 
@@ -22,11 +23,23 @@ class  Albums extends Component {
         return body;
     }
 
+    getArtists = async() => {
+      const response = await fetch('/api/artists');
+      const body = await response.json();
+      if (response.status !== 200) throw Error(body.message);
+      return body;
+    }
+
     componentDidMount() {
         this.getAlbums()
           .then(res => {          
             this.setState({ getAlbums: res });          
-          });      
+          });
+        this.getArtists()
+          .then(res => {          
+            this.setState({ getArtists: res });          
+          }); 
+        
     }
 
     //delete album by id
@@ -109,7 +122,12 @@ class  Albums extends Component {
         document.getElementById("results").innerHTML = message;
         
         return body;
-    }
+    };
+
+    //get name of the artist
+    getName = (item) => {     
+        if (item ) return item.Name;
+    }  
 
     //edit item
     async editItem(id, alb, artid) {
@@ -135,7 +153,7 @@ class  Albums extends Component {
     }
 
     render() {
-        const { getAlbums } = this.state;
+        const { getAlbums, getArtists } = this.state;
 
         //get all albums (home)
         const Home = () => (
@@ -165,6 +183,11 @@ class  Albums extends Component {
                     />
                   </td>
                   <td>
+                    <div className={`artist-${getAlbums[index].ArtistId}`}>
+                      {
+                        this.getName(getArtists.find(e => e.ArtistId === getAlbums[index].ArtistId))
+                      }
+                    </div>
                     <input
                         type="number"
                         className="form-control col-sm-4 artist-td"
