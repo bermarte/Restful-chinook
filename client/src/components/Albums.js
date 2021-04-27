@@ -65,6 +65,15 @@ class  Albums extends Component {
   
     }
 
+    //find artist by id
+    upName = (uiid, par) => {
+      const artid = this.state.getAlbums[uiid-1].ArtistId;
+      const item = this.state.getArtists.find(e => e.ArtistId === Number(artid))
+      if (item)
+        document.getElementById(`artist_${uiid}`).innerHTML = this.getName(item);
+     
+    }
+
     //PUT: title and album id
     handleInputChange(event, id){
         const val = event.target.value;
@@ -72,11 +81,15 @@ class  Albums extends Component {
         const newState = Object.assign({}, this.state);
         newState.getAlbums[id-1].Title = val;
     }
-    handleInputArtistChange(event, id){
+    async handleInputArtistChange(event, id){
       let val = event.target.value;
       //set value for editItem, new state
+
       const newState = Object.assign({}, this.state);
       newState.getAlbums[id-1].ArtistId = val;
+
+      //change the name of artist
+      this.upName(id, val);
     }
   
     //search by id or name
@@ -94,6 +107,15 @@ class  Albums extends Component {
       }
       const s = arr.join('%');
       return `%${s}`
+    }
+    //fetch the name of the artist
+    fetchName = async (idpar) => {
+      //second fetch (get the name of the artist)
+      const second_response = await fetch(`/api/artists/search/${idpar}`);
+      const second_body = await second_response.json();
+      if (second_response.status !== 200) throw Error(second_body.message);
+      const artistname = await second_body[0].Name;
+      return artistname;
     }
 
     //search item
@@ -113,7 +135,10 @@ class  Albums extends Component {
           let data = body[0].Title;
           let id = body[0].AlbumId;
           let artistid = body[0].ArtistId;
-          message = `id: ${id} ${data} <br> artist id: ${artistid}`;
+
+          //call name fetch
+          const artistname = await this.fetchName(artistid);
+          message = `id: ${id} ${data} <br> artist id: ${artistid} [${artistname}]`;
         }
         
         //show results
@@ -125,8 +150,8 @@ class  Albums extends Component {
     };
 
     //get name of the artist
-    getName = (item) => {     
-        if (item ) return item.Name;
+    getName = (item) => {
+        if (item) return item.Name;
     }  
 
     //edit item
@@ -143,6 +168,8 @@ class  Albums extends Component {
         try {
           const fetchResponse = await fetch(`http://localhost:8080/api/albums/${id}`, settings);
           const data = await fetchResponse.json();
+
+          this.upName(artid, artid-1);
           alert('item saved');
           return data;
         } catch (e) {
@@ -172,7 +199,7 @@ class  Albums extends Component {
               
                 <tr key={index+1}>
                   <td className="align-middle">{album.AlbumId}</td>
-                  <td>
+                  <td className="align-middle">
 
                     <input
                     type="text"
@@ -183,10 +210,12 @@ class  Albums extends Component {
                     />
                   </td>
                   <td>
-                    <div className={`artist-${getAlbums[index].ArtistId}`}>
+                    <div>
+                      <span className="artist pr-2 pl-2" id={`artist_${index+1}`}>
                       {
                         this.getName(getArtists.find(e => e.ArtistId === getAlbums[index].ArtistId))
                       }
+                      </span>
                     </div>
                     <input
                         type="number"
