@@ -36,7 +36,7 @@ class  Artists extends Component {
           method: 'DELETE'
         };
         try {
-          const fetchResponse = await fetch(`http://localhost:8080/api/artists/${item}`, settings);
+          const fetchResponse = await fetch(`/api/artists/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
      
@@ -116,7 +116,7 @@ class  Artists extends Component {
           body: JSON.stringify({name: art})
         };
         try {
-          const fetchResponse = await fetch(`http://localhost:8080/api/artists/${id}`, settings);
+          const fetchResponse = await fetch(`/api/artists/${id}`, settings);
           const data = await fetchResponse.json();
           alert('item saved');
           return data;
@@ -236,7 +236,7 @@ class  Artists extends Component {
                 body: JSON.stringify({name: list})
               };
               try {
-                const fetchResponse = await fetch(`http://localhost:8080/api/artists`, settings);
+                const fetchResponse = await fetch(`/api/artists`, settings);
                 const data = await fetchResponse.json();
                 alert('new item added');
 

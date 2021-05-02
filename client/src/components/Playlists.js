@@ -38,7 +38,7 @@ class  Playlists extends Component {
         method: 'DELETE'
       };
       try {
-        const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${item}`, settings);
+        const fetchResponse = await fetch(`/api/playlists/${item}`, settings);
         const data = await fetchResponse.json();
         alert('item deleted');
         
@@ -118,7 +118,7 @@ class  Playlists extends Component {
         body: JSON.stringify({name: nam})
       };
       try {
-        const fetchResponse = await fetch(`http://localhost:8080/api/playlists/${id}`, settings);
+        const fetchResponse = await fetch(`/api/playlists/${id}`, settings);
         const data = await fetchResponse.json();
         alert('item saved');
         return data;
@@ -237,7 +237,7 @@ class  Playlists extends Component {
                 body: JSON.stringify({name: list})
               };
               try {
-                const fetchResponse = await fetch(`http://localhost:8080/api/playlists`, settings);
+                const fetchResponse = await fetch(`/api/playlists`, settings);
                 const data = await fetchResponse.json();
                 alert('new item added');
 

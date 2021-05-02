@@ -51,7 +51,7 @@ class Tracks extends Component {
             method: 'DELETE'
         };
         try {
-            const fetchResponse = await fetch(`http://localhost:8080/api/tracks/${item}`, settings);
+            const fetchResponse = await fetch(`/api/tracks/${item}`, settings);
             const data = await fetchResponse.json();
             alert('item deleted');
 
@@ -149,7 +149,7 @@ class Tracks extends Component {
             }
         };
         try {
-            const fetchResponse = await fetch(`http://localhost:8080/api/tracks/search/${id}`, settings);
+            const fetchResponse = await fetch(`/api/tracks/search/${id}`, settings);
             const data = await fetchResponse.json();
             return data;
         } catch (e) {
@@ -340,7 +340,7 @@ class Tracks extends Component {
 
                     };
                     try {
-                        const fetchResponse = await fetch(`http://localhost:8080/api/tracks`, settings);
+                        const fetchResponse = await fetch(`/api/tracks`, settings);
                         const data = await fetchResponse.json();
                         alert('new item added');
 
@@ -518,7 +518,7 @@ class Tracks extends Component {
                         })
                     };
                     try {
-                        const fetchResponse = await fetch(`http://localhost:8080/api/tracks/${arr[0]}`, settings);
+                        const fetchResponse = await fetch(`/api/tracks/${arr[0]}`, settings);
                         const data = await fetchResponse.json();
                         alert('item saved');
                         return data;

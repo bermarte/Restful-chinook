@@ -70,8 +70,7 @@ class  Albums extends Component {
       const artid = this.state.getAlbums[uiid-1].ArtistId;
       const item = this.state.getArtists.find(e => e.ArtistId === Number(artid))
       if (item)
-        document.getElementById(`artist_${uiid}`).innerHTML = this.getName(item);
-     
+        document.getElementById(`artist_name_${uiid}`).innerHTML = this.getName(item);   
     }
 
     //PUT: title and album id
@@ -83,13 +82,14 @@ class  Albums extends Component {
     }
     async handleInputArtistChange(event, id){
       let val = event.target.value;
-      //set value for editItem, new state
 
+      //set value for editItem, new state
       const newState = Object.assign({}, this.state);
-      newState.getAlbums[id-1].ArtistId = val;
+      newState.getAlbums[id-1].ArtistId = Number(val);
 
       //change the name of artist
       this.upName(id, val);
+      
     }
   
     //search by id or name
@@ -198,7 +198,7 @@ class  Albums extends Component {
               { getAlbums.map((album,index) => 
               
                 <tr key={index+1}>
-                  <td className="align-middle">{album.AlbumId}</td>
+                  <td className="align-middle">{index+1}</td>
                   <td className="align-middle">
 
                     <input
@@ -206,12 +206,12 @@ class  Albums extends Component {
                     className="form-control"
                     id={`album_${album.AlbumId}`}
                     defaultValue={getAlbums[index].Title}
-                    onBlur={(event) => this.handleInputChange(event, album.AlbumId)}
+                    onBlur={(event) => this.handleInputChange(event, index+1)}// album.AlbumId
                     />
                   </td>
                   <td>
                     <div>
-                      <span className="artist pr-2 pl-2" id={`artist_${index+1}`}>
+                      <span className="artist pr-2 pl-2" id={`artist_name_${index+1}`}>
                       {
                         this.getName(getArtists.find(e => e.ArtistId === getAlbums[index].ArtistId))
                       }
@@ -222,7 +222,7 @@ class  Albums extends Component {
                         className="form-control col-sm-4 artist-td"
                         id={`artist_${album.AlbumId}`}
                         defaultValue={getAlbums[index].ArtistId}
-                        onChange={(event) => this.handleInputArtistChange(event, album.AlbumId)}
+                        onChange={(event) => this.handleInputArtistChange(event, index+1)}//album.AlbumId
                         min="1" max="10000"
                     />
                   </td>
@@ -289,7 +289,6 @@ class  Albums extends Component {
             const handleSubmit = (event) => {          
               event.preventDefault();
               event.stopPropagation();
-              console.log('title',albumTitle, 'artist id', artistid);
               saveAlbumlist(albumTitle, artistid);
             };
 
@@ -317,8 +316,8 @@ class  Albums extends Component {
 
                 const newState = Object.assign({}, this.state);
                 const newId = newState.getAlbums.length+1;
-                newState.getAlbums.push({AlbumId: newId, ArtistId: artistid, Title: albumtitle});
-
+                newState.getAlbums.push({AlbumId: newId, ArtistId: Number(artistid), Title: albumtitle});
+                this.props.history.push('/albums');
                 return data;
               } catch (e) {
                 alert('error');

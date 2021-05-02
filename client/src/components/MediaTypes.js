@@ -38,7 +38,7 @@ class  MediaTypes extends Component {
           method: 'DELETE'
         };
         try {
-          const fetchResponse = await fetch(`http://localhost:8080/api/media-types/${item}`, settings);
+          const fetchResponse = await fetch(`/api/media-types/${item}`, settings);
           const data = await fetchResponse.json();
           alert('item deleted');
           
@@ -119,7 +119,7 @@ class  MediaTypes extends Component {
           body: JSON.stringify({name: nam})
         };
         try {
-          const fetchResponse = await fetch(`http://localhost:8080/api/media-types/${id}`, settings);
+          const fetchResponse = await fetch(`/api/media-types/${id}`, settings);
           const data = await fetchResponse.json();
           alert('item saved');
           return data;
@@ -235,7 +235,7 @@ class  MediaTypes extends Component {
                   body: JSON.stringify({name: list})
                 };
                 try {
-                  const fetchResponse = await fetch(`http://localhost:8080/api/media-types`, settings);
+                  const fetchResponse = await fetch(`/api/media-types`, settings);
                   const data = await fetchResponse.json();
                   alert('new item added');
 

@@ -49,7 +49,7 @@ class Genres extends Component {
             method: 'DELETE'
         };
         try {
-            const fetchResponse = await fetch(`http://localhost:8080/api/genres/${item}`, settings);
+            const fetchResponse = await fetch(`/api/genres/${item}`, settings);
             const data = await fetchResponse.json();
             alert('item deleted');
 
@@ -136,7 +136,7 @@ class Genres extends Component {
             body: JSON.stringify({name: nam})
         };
         try {
-            const fetchResponse = await fetch(`http://localhost:8080/api/genres/${id}`, settings);
+            const fetchResponse = await fetch(`/api/genres/${id}`, settings);
             const data = await fetchResponse.json();
             alert('item saved');
             return data;
@@ -257,7 +257,7 @@ class Genres extends Component {
                         body: JSON.stringify({name: list})
                     };
                     try {
-                        const fetchResponse = await fetch(`http://localhost:8080/api/genres`, settings);
+                        const fetchResponse = await fetch(`/api/genres`, settings);
                         const data = await fetchResponse.json();
                         alert('new item added');
                         
