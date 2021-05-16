@@ -60,7 +60,8 @@ const controllers = {
   create: (req, res) => {
     // read row data from body
     const re = req.body;
-    const sql = `INSERT into tracks(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes, UnitPrice) values((SELECT MAX(TrackId) from tracks)+1, "${re.name}", ${re.album}, ${re.media}, ${re.genre}, "${re.composer}", ${re.time}, ${re.bytes}, ${re.price} )`;
+    const sql = `INSERT into tracks(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes, UnitPrice) values((SELECT MAX(TrackId) from tracks)+1,
+    "${re.name}", ${re.album}, ${re.media}, ${re.genre}, "${re.composer}", ${re.time}, ${re.bytes}, ${re.price} )`;
 
     db.all(sql, (err, rows) => {
       if (err) {
@@ -95,7 +96,8 @@ const controllers = {
 
         //there's an item with that id, it's okay to modify it
         sql = `UPDATE tracks SET Name="${re.name}", AlbumId=${re.album},
-        MediaTypeId=${re.media}, GenreId=${re.genre}, Composer="${re.composer}", Milliseconds=${re.time}, Bytes=${re.bytes}, UnitPrice=${re.price} WHERE TrackId = ${req.params.id}`;
+        MediaTypeId=${re.media}, GenreId=${re.genre}, Composer="${re.composer}", Milliseconds=${re.time}, Bytes=${re.bytes}, UnitPrice=${re.price} WHERE TrackId 
+        = ${req.params.id}`;
         db.all(sql, (err, rows) => {
           if (err) {
             res.status(400).json({
